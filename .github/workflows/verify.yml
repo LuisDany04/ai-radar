@@ -1,0 +1,40 @@
+name: Verificar contenido
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Lunes a las 07:00 UTC: avisa si algún enlace citado se ha roto.
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar fichas y regenerar el bundle
+        run: bash scripts/build.sh
+
+      - name: Comprobar que el bundle está al día
+        run: |
+          if ! git diff --quiet -- assets/data.js content/index.json; then
+            echo "::error::assets/data.js no coincide con content/. Ejecuta 'bash scripts/build.sh' y haz commit del resultado."
+            git diff --stat -- assets/data.js content/index.json
+            exit 1
+          fi
+
+      - name: Verificar los enlaces citados
+        # Informativo: un 404 no debe bloquear el despliegue, pero sí quedar registrado.
+        continue-on-error: true
+        run: bash scripts/check-links.sh
+
+      - name: Publicar el informe de enlaces
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: informe-enlaces
+          path: docs/link-check.md
+          if-no-files-found: ignore
