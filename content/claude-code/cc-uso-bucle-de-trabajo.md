@@ -43,7 +43,7 @@ commit with a descriptive message and open a PR
 
 ## Debate
 
-No todos coinciden en cuánta autonomía darle al agente dentro de ese bucle. Armin Ronacher, creador de Flask, describe su forma de trabajar como asignar una tarea a un agente con permisos completos y esperar a que termine, usando casi siempre Sonnet en vez de Opus por resultarle "perfectamente adecuado". Es un extremo de confianza alta: explorar y planificar ocurren dentro del propio bucle del agente, con supervisión mínima del humano en el camino.
+No todos coinciden en cuánta autonomía darle al agente dentro de ese bucle. Armin Ronacher, creador de Flask, describe su forma de trabajar como asignar una tarea a un agente con permisos completos y esperar a que termine, usando casi siempre Sonnet en vez de Opus por resultarle perfectamente adecuado para su trabajo. Es un extremo de confianza alta: explorar y planificar ocurren dentro del propio bucle del agente, con supervisión mínima del humano en el camino.
 
 Meses después, el mismo Ronacher matizó esa postura para el código que más le importa. Distingue entre el "agent loop" (el modelo llamando herramientas dentro de una sesión) y el "harness loop" (un sistema externo que decide cuándo sigue el trabajo), y reconoce que ese segundo modo, más autónomo, no le ha dado buenos resultados en el código que le importa de verdad. Sobre dejar que el bucle itere solo sin revisión, advierte: "the system slowly becomes less understandable."
 

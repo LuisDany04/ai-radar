@@ -12,7 +12,7 @@ source_span: 2025-10-16..2026-09-20
 confidence: alta
 ---
 
-La guía oficial de Anthropic para escribir skills parte de una premisa incómoda: la mayoría de las skills fallan no por instrucciones mal escritas, sino porque el campo `description` no dispara cuando debería, o dispara cuando no debería. El resto de los errores comunes son variaciones de "tratar a Claude como si no supiera nada" o "no probar la skill antes de compartirla".
+La guía oficial de Anthropic para escribir skills parte de una premisa incómoda: la mayoría de las skills fallan no por instrucciones mal escritas, sino porque el campo `description` no dispara cuando debería, o dispara cuando no debería. El resto de los errores comunes son variaciones de explicarle a Claude cosas que ya sabe, o de no haber probado la skill antes de compartirla.
 
 ## Por qué importa
 
@@ -38,7 +38,7 @@ Después (buena, ejemplo oficial de la skill de PDF):
 description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
 ```
 
-**Regla 3 — Concisión en el cuerpo.** Cada token del SKILL.md compite con el resto de la conversación una vez cargado. La premisa de partida: "Claude ya es muy inteligente" — solo agregar contexto que Claude de verdad no tiene.
+**Regla 3 — Concisión en el cuerpo.** Cada token del SKILL.md compite con el resto de la conversación una vez cargado. La premisa de partida de la guía oficial es asumir que Claude ya es muy inteligente, y solo agregar contexto que de verdad no tiene.
 
 Antes (mala, ~150 tokens, del checklist oficial):
 ```markdown

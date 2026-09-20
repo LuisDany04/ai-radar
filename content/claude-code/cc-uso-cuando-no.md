@@ -23,7 +23,7 @@ Anthropic distingue explícitamente entre Chat y Cowork/Code según dónde vive 
 Situaciones donde cambiar de Claude Code a Chat (o a otra persona) tiene más sentido, según fuentes con nombre:
 
 - **Decidir antes de ejecutar**: evaluar una arquitectura, sopesar un trade-off, redactar un borrador, resumir un documento largo, hacer brainstorming de nombres. Chat espera después de cada respuesta; Code encadena acciones solo.
-- **Dar acceso a alguien que no programa**: Amit Kothari, autor de un blog sobre herramientas Claude, advierte contra comprar licencias de Code para equipos de operaciones, ventas o RR.HH.: para él, dar una terminal a alguien que necesita un entregable simple es "como darle un taladro cuando necesita un pincel".
+- **Dar acceso a alguien que no programa**: Amit Kothari, autor de un blog sobre herramientas Claude, advierte contra comprar licencias de Code para equipos de operaciones, ventas o RR.HH.: para él, darle una terminal a alguien que solo necesita un entregable simple equivale a entregarle un taladro cuando lo que hace falta es un pincel.
 - **Código que de verdad te importa**: Armin Ronacher, creador de Flask, reconoce que el modo más autónomo de trabajar con agentes no le ha dado buenos resultados cuando se trata de código crítico para él, aunque sí lo usa para migraciones de código o exploraciones de rendimiento.
 - **Beneficios de equipo que la IA no reemplaza**: Birgitta Böckeler, de Thoughtworks, señala que el pair programming aporta propiedad colectiva del código y conocimiento tácito del equipo; un asistente de IA no sustituye eso, en todo caso hace mejores a las parejas humanas que ya pairean.
 

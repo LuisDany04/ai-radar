@@ -50,7 +50,7 @@ Guía de cuándo agregar cada extensión, según el mismo documento:
 
 ## Debate
 
-**Postura 1 — Anthropic (docs oficiales, 2026-06-18):** las seis herramientas son complementarias y cada una resuelve un problema distinto; combinarlas es lo esperado ("CLAUDE.md maneja contexto siempre activo, skills manejan conocimiento bajo demanda, MCP maneja conexiones externas, subagentes manejan aislamiento y hooks manejan automatización"). El blog oficial insiste en que una instrucción tipo "nunca edites .env" puesta en CLAUDE.md o en una skill es un pedido, no una garantía: si algo debe cumplirse siempre, va en un hook, no en un prompt.
+**Postura 1 — Anthropic (docs oficiales, 2026-06-18):** las seis herramientas son complementarias y cada una resuelve un problema distinto; combinarlas es lo esperado: CLAUDE.md para contexto siempre activo, skills para conocimiento bajo demanda, MCP para conexiones externas, subagentes para aislamiento y hooks para automatización. El blog oficial insiste en que una instrucción como no editar un archivo `.env`, puesta en CLAUDE.md o en una skill, es un pedido y no una garantía: si algo debe cumplirse siempre, va en un hook, no en un prompt.
 
 **Postura 2 — Práctica de la comunidad (múltiples fuentes técnicas, 2026):** el eje real de decisión entre Skills y MCP no es conceptual sino de **volatilidad de los datos**: si la información cambia entre invocaciones (una API en vivo, una base de datos), es MCP; si se mantiene estable durante semanas (un checklist, un estilo de commit), es una skill. Esta lectura, repetida por varias fuentes técnicas de comparación en 2026, es más operativa que la distinción oficial de "acceso vs. conocimiento" y ayuda quien no tiene claro dónde trazar la línea en casos ambiguos.
 

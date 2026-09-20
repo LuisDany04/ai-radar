@@ -346,7 +346,7 @@
       (d.summary ? '<p class="doc-sum">' + esc(d.summary) + '</p>' : '') +
       '<div class="doc-facts">' +
         (d.updated ? '<span class="fact">ficha escrita <b>' + esc(d.updated) + '</b></span>' : '') +
-        (d.span ? '<span class="fact">fuentes de <b>' + esc(d.span.replace('..', '</b> a <b>')) + '</b></span>' : '') +
+        (d.span ? '<span class="fact">fuentes de <b>' + esc(d.span).replace('..', '</b> a <b>') + '</b></span>' : '') +
         '<span class="fact">' + d.sources.length + ' fuentes citadas</span>' +
         '<span class="fact conf-' + esc(d.confidence) + '">confianza <b>' + esc(d.confidence) + '</b></span>' +
       '</div>';
@@ -421,7 +421,9 @@
       [pubDates.length ? pubDates[pubDates.length - 1] : '—', 'fuente más reciente']
     ].forEach(function (s) {
       var n = el('div', 'stat');
-      n.innerHTML = '<div class="v">' + esc(String(s[0])) + '</div><div class="k">' + esc(s[1]) + '</div>';
+      var v = String(s[0]);
+      var cls = v.length > 7 ? 'v small' : 'v';
+      n.innerHTML = '<div class="' + cls + '">' + esc(v) + '</div><div class="k">' + esc(s[1]) + '</div>';
       stats.appendChild(n);
     });
     wrap.appendChild(stats);

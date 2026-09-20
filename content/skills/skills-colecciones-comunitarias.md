@@ -37,10 +37,10 @@ El propio README lista instalación equivalente para más de una decena de agent
 
 ## Qué propone
 
-Según su propio autor, Superpowers es "una metodología completa de desarrollo de software para agentes de código, construida sobre un set de skills componibles". El flujo que impone, cuando detecta que el usuario está construyendo algo, es:
+Según su propio autor, Superpowers es una metodología completa de desarrollo de software para agentes de código, construida sobre un set de skills componibles. El flujo que impone, cuando detecta que el usuario está construyendo algo, es:
 
 1. **Brainstorming**: en vez de saltar a escribir código, el agente pregunta qué se busca realmente y arma una spec en fragmentos legibles.
-2. **Plan**: una vez aprobada la spec, arma un plan de implementación "lo bastante claro para que lo siga un ingeniero junior entusiasta, sin criterio ni contexto del proyecto, con aversión a los tests".
+2. **Plan**: una vez aprobada la spec, arma un plan de implementación lo bastante detallado como para que lo pueda seguir un ingeniero junior sin contexto del proyecto y sin hábito de testear.
 3. **TDD rojo/verde**: escribir un test que falla, implementar lo mínimo para que pase, seguir.
 4. **Desarrollo dirigido por subagentes**: cada tarea del plan se despacha a un subagente distinto, con revisión de código antes de seguir.
 
@@ -48,11 +48,11 @@ Según su propio autor, Superpowers es "una metodología completa de desarrollo 
 
 **Postura a favor (emschwartz, reseña independiente en Hacker News, 2026):** valora el enfoque estructurado; suele saltarse la revisión del plan y pasar directo a implementación porque confía en el andamiaje. `tao_oat`, en el mismo hilo, destaca la skill de brainstorming para desarrollar ideas poco definidas y la autorevisión adversarial entre subagentes para detectar problemas que se pasarían por alto.
 
-**Postura escéptica (`d--b`, mismo hilo de Hacker News, 2026):** reporta que "Claude comete más errores usando Superpowers que sin él", aunque reconoce que podría ser su forma de usarlo más que el framework en sí — "sigue siendo el mismo Claude".
+**Postura escéptica (`d--b`, mismo hilo de Hacker News, 2026):** reporta que "Claude makes more mistakes when using superpowers than when not", aunque reconoce que podría ser su forma de usarlo más que el framework en sí, y agrega que sigue siendo el mismo modelo por debajo.
 
-**Postura escéptica más amplia, sobre colecciones de skills en general (Kyle Redelinghuys, ksred.com, 2026-08-10):** cita un análisis de Mikhail Shcheglov que instaló las 47 skills de una colección popular (no identificada por nombre en el artículo) y las probó contra Claude Code sin skills: 40 de las 47 empeoraron el resultado. La recomendación del artículo es instalar de forma selectiva ("cinco skills públicas, un puñado de skills propias con evals") en vez de acumular colecciones enteras.
+**Postura escéptica más amplia, sobre colecciones de skills en general (Kyle Redelinghuys, ksred.com, 2026-08-10):** cita un análisis de Mikhail Shcheglov que instaló las 47 skills de una colección popular (no identificada por nombre en el artículo) y las probó contra Claude Code sin skills: 40 de las 47 empeoraron el resultado. La recomendación del artículo es instalar de forma selectiva, con pocas skills públicas y el resto propias y con evaluaciones, en vez de acumular colecciones enteras.
 
-> [!duda] El artículo de ksred.com no confirma si la colección de 47 skills evaluada por Shcheglov era Superpowers, una de las listas "awesome-claude-skills", u otra distinta. La cifra de "40 de 47 empeoran" no debe leerse como una medición sobre Superpowers específicamente.
+> [!duda] El artículo de ksred.com no confirma si la colección de 47 skills evaluada por Shcheglov era Superpowers, una de las listas awesome-claude-skills, u otra distinta. La cifra de 40 de 47 empeoran no debe leerse como una medición sobre Superpowers específicamente.
 
 ## Otras colecciones grandes
 

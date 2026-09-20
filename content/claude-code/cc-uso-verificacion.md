@@ -16,7 +16,7 @@ La guía oficial de Claude Code presenta la verificación como la práctica más
 
 ## Por qué importa
 
-Anthropic describe un patrón de fallo concreto al que llama "the trust-then-verify gap": Claude produce una implementación que parece plausible pero no maneja casos límite. Su corrección es tajante: si no puedes verificarlo, no lo despliegues. Birgitta Böckeler, de Thoughtworks, lo enmarca de forma más amplia: los modelos "piensan en tokens" y no entienden de verdad el código, así que la confianza para darles más autonomía se construye con dos tipos de control -- "guides" que dirigen al agente antes de actuar y "sensors" que verifican después -- no se asume de entrada.
+Anthropic describe un patrón de fallo concreto al que llama "the trust-then-verify gap": Claude produce una implementación que parece plausible pero no maneja casos límite. Su corrección es tajante: si no puedes verificarlo, no lo despliegues. Birgitta Böckeler, de Thoughtworks, lo enmarca de forma más amplia: los modelos piensan en tokens y no entienden de verdad el código, así que la confianza para darles más autonomía se construye con dos tipos de control -- "guides" que dirigen al agente antes de actuar y "sensors" que verifican después -- no se asume de entrada.
 
 ## Ejemplo
 
@@ -55,7 +55,7 @@ Anthropic lanzó el 2026-03-09 un producto de revisión de código con múltiple
 
 ¿Cuánta revisión humana sigue haciendo falta cuando el código lo escribe y lo revisa una IA? Ankit Jain, CEO de Aviator, sostiene que la revisión post-PR tal como se practicaba se está volviendo obsoleta: cita un informe de Faros según el cual el "code churn" subió 861%, los incidentes por PR subieron 243% y el 31% de los PRs se fusionan sin revisión. Su argumento de fondo es que cuando el mismo modelo escribe y revisa, comparten los mismos puntos ciegos: "they share the same blind spots". Su propuesta no es eliminar la revisión sino moverla más arriba, a la intención y los criterios de aceptación, en vez de al diff línea por línea.
 
-Cat Wu, responsable de producto en Anthropic, defiende la postura contraria desde el lanzamiento de la herramienta: la empresa decidió enfocar la revisión automática "purely on logic errors" y la presenta como respuesta a que el volumen de código generado por IA ya supera lo que un equipo humano puede revisar a mano. En el hilo de Hacker News sobre el lanzamiento (2026-03-09), varios comentaristas cuestionan ese enfoque desde otro ángulo: jgraettinger1 observa que la herramienta "will always find about 8 issues" independientemente de la calidad real del código, y toniantunovi propone separar responsabilidades -- linters para estilo, IA solo para razonamiento complejo sobre seguridad o diseño.
+Cat Wu, responsable de producto en Anthropic, defiende la postura contraria desde el lanzamiento de la herramienta: según explicó, la empresa decidió enfocar la revisión automática exclusivamente en errores de lógica, y la presenta como respuesta a que el volumen de código generado por IA ya supera lo que un equipo humano puede revisar a mano. En el hilo de Hacker News sobre el lanzamiento (2026-03-09), varios comentaristas cuestionan ese enfoque desde otro ángulo: jgraettinger1 observa que la herramienta encuentra siempre alrededor de 8 problemas independientemente de la calidad real del código, y toniantunovi propone separar responsabilidades -- linters para estilo, IA solo para razonamiento complejo sobre seguridad o diseño.
 
 ## Cómo empezar
 

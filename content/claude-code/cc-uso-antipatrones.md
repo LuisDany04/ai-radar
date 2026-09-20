@@ -12,7 +12,7 @@ source_span: 2026-04-23..2026-04-28
 confidence: media
 ---
 
-La propia guía de buenas prácticas de Claude Code dedica una sección a "avoid common failure patterns": errores que se repiten con la suficiente frecuencia como para que Anthropic los documente por nombre. Por separado, hilos de Hacker News de 2026 muestran cómo se sienten esos mismos patrones desde el lado del usuario cuando nadie los corrige a tiempo.
+La propia guía de buenas prácticas de Claude Code dedica una sección a evitar patrones de fallo comunes: errores que se repiten con la suficiente frecuencia como para que Anthropic los documente por nombre. Por separado, hilos de Hacker News de 2026 muestran cómo se sienten esos mismos patrones desde el lado del usuario cuando nadie los corrige a tiempo.
 
 ## Por qué importa
 
@@ -32,11 +32,11 @@ Los cinco antipatrones que documenta Anthropic, con su corrección recomendada:
 
 ## Debate
 
-En el hilo "Ask HN: Is it just me or is Claude Code getting worse?" (2026-04-28), el usuario tstrimple describe que versiones recientes de Opus fallan en tareas que versiones anteriores resolvían sin problema, y usa la palabra "lobotomized" para describirlo; SnyDi coincide en que el modelo empeora con el tiempo. Pero rosenlykke matiza desde el mismo hilo: buena parte de lo que parece regresión del modelo puede ser deriva de configuración, ya que cambios de setup producen salidas "dramáticamente distintas" para la misma tarea.
+En el hilo "Ask HN: Is it just me or is Claude Code getting worse?" (2026-04-28), el usuario tstrimple describe que versiones recientes de Opus fallan en tareas que versiones anteriores resolvían sin problema, y lo describe como un modelo "lobotomizado"; SnyDi coincide en que el modelo empeora con el tiempo. Pero rosenlykke matiza desde el mismo hilo: buena parte de lo que parece regresión del modelo puede ser deriva de configuración, ya que cambios de setup producen salidas muy distintas para la misma tarea.
 
-En "I cancelled Claude: Token issues, declining quality, and poor support" (2026-04-24), el autor original (wg0) reporta que el código generado "missed requirements, had duplicate code" y que el mismo prompt produce resultados distintos cada vez, lo que le hizo dudar de si la herramienta era rentable para software de producción. Otros comentaristas del mismo hilo, sin embargo, reportan ganancias de productividad reales cuando cuidan el prompting.
+En "I cancelled Claude: Token issues, declining quality, and poor support" (2026-04-24), el autor original (wg0) reporta que el código generado no cumplía los requisitos y tenía código duplicado, y que el mismo prompt produce resultados distintos cada vez, lo que le hizo dudar de si la herramienta era rentable para software de producción. Otros comentaristas del mismo hilo, sin embargo, reportan ganancias de productividad reales cuando cuidan el prompting.
 
-Un tercer caso muestra el otro lado del problema: no es el modelo el que degrada, es un cambio no anunciado. Boris Cherny, del equipo de Claude Code, explicó en el hilo "An update on recent Claude Code quality reports" (2026-04-23) que un cambio del 26 de marzo, pensado para reducir coste limpiando el "thinking" de sesiones inactivas, empezó a limpiarlo en cada turno en vez de una sola vez, haciendo que Claude pareciera "olvidadizo y repetitivo" hasta que lo arreglaron el 10 de abril. El usuario CjHuber lo vivió como una traición: "Claude literally became useless to me". El comentarista jwr generalizó la queja: cambiar el comportamiento del producto sin avisar a quien lo usa.
+Un tercer caso muestra el otro lado del problema: no es el modelo el que degrada, es un cambio no anunciado. Boris Cherny, del equipo de Claude Code, explicó en el hilo "An update on recent Claude Code quality reports" (2026-04-23) que un cambio del 26 de marzo, pensado para reducir coste limpiando el razonamiento interno de sesiones inactivas, empezó a limpiarlo en cada turno en vez de una sola vez, haciendo que Claude pareciera olvidadizo y repetitivo hasta que lo arreglaron el 10 de abril. El usuario CjHuber lo vivió como una traición: "Claude literally became useless to me". El comentarista jwr generalizó la queja: cambiar el comportamiento del producto sin avisar a quien lo usa.
 
 ## Cómo empezar
 

@@ -50,7 +50,7 @@ La diferencia entre los dos comandos principales: `/compact` resume el historial
 | Respuestas incorrectas cuando hay varios "distractores" en el contexto, según configuración | ~60-70% de los casos | Chroma, 2025-07-14 |
 | Ventana de contexto de Claude Code (anunciada) | 1 millón de tokens | Anthropic, 2026-04-15 |
 
-> [!duda] Anthropic anunció una ventana de 1 millón de tokens el 2026-04-15 como mejora para tareas largas, pero un hilo de Hacker News del 2026-04-28 atribuye el inicio de la sensación de "Claude Code empeoró" justo a la introducción de ese contexto de 1M en la versión 4.6 (usuario e-nouri). No hay dato oficial que confirme o descarte una relación causal.
+> [!duda] Anthropic anunció una ventana de 1 millón de tokens el 2026-04-15 como mejora para tareas largas, pero un hilo de Hacker News del 2026-04-28 atribuye el inicio de la sensación de que Claude Code empeoró justo a la introducción de ese contexto de 1M en la versión 4.6 (usuario e-nouri). No hay dato oficial que confirme o descarte una relación causal.
 
 ## Debate
 

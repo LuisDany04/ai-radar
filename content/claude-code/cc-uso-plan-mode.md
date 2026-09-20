@@ -48,7 +48,7 @@ Una vez escrita la especificación, Anthropic recomienda empezar una sesión nue
 
 ## Debate
 
-¿Cuándo conviene pasar de plan mode a una especificación persistida? Anthropic da un criterio de una frase: si puedes describir el cambio en una sola línea, no hace falta planificar. Tuychiev propone un umbral más concreto para dar el salto a SDD: alrededor de cuatro archivos afectados, un refactor con un estado final coherente, o cuando lo difícil es decidir "qué debe hacer esto" y no "cómo lo escribo". Ambas fuentes coinciden en que el plan mode sin persistir es apropiado para el caso común, y que la especificación en disco se justifica solo cuando el cambio es lo bastante grande como para que valga la pena una revisión humana intermedia.
+¿Cuándo conviene pasar de plan mode a una especificación persistida? Anthropic da un criterio de una frase: si puedes describir el cambio en una sola línea, no hace falta planificar. Tuychiev propone un umbral más concreto para dar el salto a SDD: alrededor de cuatro archivos afectados, un refactor con un estado final coherente, o cuando lo difícil es decidir qué debe hacer el sistema y no cómo escribir el código. Ambas fuentes coinciden en que el plan mode sin persistir es apropiado para el caso común, y que la especificación en disco se justifica solo cuando el cambio es lo bastante grande como para que valga la pena una revisión humana intermedia.
 
 ## Cómo empezar
 

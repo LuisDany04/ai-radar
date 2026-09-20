@@ -12,11 +12,11 @@ source_span: 2025-10-16..2026-09-20
 confidence: alta
 ---
 
-El repositorio [`anthropics/skills`](https://github.com/anthropics/skills) contiene, al 20-09-2026, 19 skills organizadas en cuatro grupos: documentos, creativo/diseño, desarrollo/técnico y empresa/comunicación. El propio README aclara que la mayoría son "para demostración y fines educativos", con una excepción explícita: las cuatro skills de documentos son las que de verdad usa Claude en producción.
+El repositorio [`anthropics/skills`](https://github.com/anthropics/skills) contiene, al 20-09-2026, 19 skills organizadas en cuatro grupos: documentos, creativo/diseño, desarrollo/técnico y empresa/comunicación. El propio README aclara que la mayoría se ofrecen solo con fines de demostración y educativos, con una excepción explícita: las cuatro skills de documentos son las que de verdad usa Claude en producción.
 
 ## Por qué importa
 
-Este repo es la referencia canónica de "cómo escribe Anthropic sus propias skills", y mezcla dos cosas distintas que conviene no confundir: herramientas que están corriendo ahora mismo dentro de Claude.ai y la API (docx, pdf, pptx, xlsx) y ejemplos ilustrativos pensados para copiar el patrón, no necesariamente para usar tal cual.
+Este repo es la referencia más directa de cómo escribe Anthropic sus propias skills, y mezcla dos cosas distintas que conviene no confundir: herramientas que están corriendo ahora mismo dentro de Claude.ai y la API (docx, pdf, pptx, xlsx) y ejemplos ilustrativos pensados para copiar el patrón, no necesariamente para usar tal cual.
 
 ## Ejemplo
 
@@ -79,7 +79,7 @@ Las dos últimas (`academy-guide`, `discernment-nudge`) no estaban documentadas 
 - **`mcp-builder` y `skill-creator`** son las de mayor apalancamiento para quien construye herramientas propias: la primera resume buenas prácticas de diseño de tools para LLM, la segunda formaliza el ciclo de evaluación que describe la ficha sobre cómo escribir una skill.
 - **`claude-api`** ya viene instalada por defecto en Claude Code — no hace falta ir a buscarla al repo salvo que quieras usarla en otro entorno compatible con skills.
 - **`webapp-testing`** es directamente aplicable a cualquier proyecto con frontend local; usa Playwright con scripts ya escritos en vez de generar código de automatización desde cero.
-- El resto (arte algorítmico, temas, GIFs de Slack, comms internas) son más demostrativas: útiles como plantilla de estructura, pero el propio README advierte que "el comportamiento real de Claude puede diferir" de lo mostrado ahí.
+- El resto (arte algorítmico, temas, GIFs de Slack, comms internas) son más demostrativas: útiles como plantilla de estructura, pero el propio README advierte que el comportamiento real de Claude puede diferir de lo mostrado ahí.
 
 ## Fuentes
 
