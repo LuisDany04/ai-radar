@@ -5,7 +5,7 @@ track: practicas
 type: guia
 level: intermedio
 tags: prompting, agentes, ingenieria de contexto, buenas practicas
-summary: "La documentacion oficial de Anthropic y OpenAI en 2026 ya no habla de trucos de prompt: habla de instrucciones directas, dials de esfuerzo y descripciones de herramientas. Dos estudios de Wharton muestran por que 'piensa paso a paso' y los personajes expertos dejaron de servir."
+summary: "La documentación oficial de Anthropic y OpenAI en 2026 ya no habla de trucos de prompt: habla de instrucciones directas, dials de esfuerzo y descripciones de herramientas. Dos estudios de Wharton muestran por qué 'piensa paso a paso' y los personajes expertos dejaron de servir."
 updated: 2026-09-21
 reading_minutes: 8
 source_span: 2025-06-08..2026-06-13

@@ -1,20 +1,20 @@
 ---
 id: context-engineering-2026
-title: "Context engineering: la disciplina que reemplazo al prompt engineering"
+title: "Context engineering: la disciplina que reemplazó al prompt engineering"
 track: practicas
 type: guia
 level: intermedio
 tags: context engineering, agentes, compactacion, subagentes, memoria, contexto
-summary: "Que significa cuidar el contexto de un agente en 2026: compactacion, notas externas, subagentes y recuperacion justo a tiempo, con la definicion oficial de Anthropic."
+summary: "Qué significa cuidar el contexto de un agente en 2026: compactación, notas externas, subagentes y recuperación justo a tiempo, con la definición oficial de Anthropic."
 updated: 2026-09-20
 reading_minutes: 7
 source_span: 2025-06-27..2025-11-26
 confidence: alta
 ---
 
-Anthropic define "context engineering" como "el conjunto de estrategias para curar y mantener el conjunto optimo de tokens durante la inferencia", en un post publicado el 29 de septiembre de 2025. La idea central: el contexto de un agente (system prompt, herramientas, historial de mensajes, datos externos) es un recurso finito, y la pregunta que importa ya no es "¿que palabras uso en el prompt?" sino "¿que configuracion de contexto hace mas probable el comportamiento que busco?".
+Anthropic define "context engineering" como "el conjunto de estrategias para curar y mantener el conjunto óptimo de tokens durante la inferencia", en un post publicado el 29 de septiembre de 2025. La idea central: el contexto de un agente (system prompt, herramientas, historial de mensajes, datos externos) es un recurso finito, y la pregunta que importa ya no es "¿qué palabras uso en el prompt?" sino "¿qué configuración de contexto hace más probable el comportamiento que busco?".
 
-El termino "prompt engineering" quedo asociado, en el uso comun, a escribir instrucciones ingeniosas para una sola llamada al modelo. Simon Willison documento el cambio de nombre en junio de 2025: cita a Andrej Karpathy definiendo context engineering como "el arte y la ciencia de llenar la ventana de contexto con exactamente la informacion correcta para el siguiente paso", y al CEO de Shopify, Tobi Lutke, describiendolo como "el arte de proveer todo el contexto para que la tarea sea resoluble, de forma plausible, por el LLM". Willison senala que "prompt engineering" broto un significado degradado (escribirle a un chatbot) mientras que el nuevo termino describe mejor el trabajo real en aplicaciones agenticas: estructurar tareas, ejemplos, RAG, herramientas, estado y memoria.
+El término "prompt engineering" quedó asociado, en el uso común, a escribir instrucciones ingeniosas para una sola llamada al modelo. Simon Willison documentó el cambio de nombre en junio de 2025: cita a Andrej Karpathy definiendo context engineering como "el arte y la ciencia de llenar la ventana de contexto con exactamente la información correcta para el siguiente paso", y al CEO de Shopify, Tobi Lutke, describiéndolo como "el arte de proveer todo el contexto para que la tarea sea resoluble, de forma plausible, por el LLM". Willison señala que "prompt engineering" brotó un significado degradado (escribirle a un chatbot) mientras que el nuevo término describe mejor el trabajo real en aplicaciones agénticas: estructurar tareas, ejemplos, RAG, herramientas, estado y memoria.
 
 ## Por que importa
 

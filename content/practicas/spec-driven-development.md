@@ -1,18 +1,18 @@
 ---
 id: spec-driven-development
-title: "Spec-driven development: la especificacion como fuente de verdad para agentes, y por que algunos la llaman waterfall disfrazado"
+title: "Spec-driven development: la especificación como fuente de verdad para agentes, y por qué algunos la llaman waterfall disfrazado"
 track: practicas
 type: guia
 level: intermedio
 tags: spec driven development, especificaciones, agentes, planificacion
-summary: "GitHub y Amazon empujan un flujo donde la especificacion, no el codigo, es el artefacto central que gobierna a los agentes. Herramientas reales, plantillas copiables y la critica seria que lo compara con el modelo waterfall."
+summary: "GitHub y Amazon empujan un flujo donde la especificación, no el código, es el artefacto central que gobierna a los agentes. Herramientas reales, plantillas copiables y la crítica seria que lo compara con el modelo waterfall."
 updated: 2026-09-21
 reading_minutes: 8
 source_span: 2025-09-02..2026-08-27
 confidence: alta
 ---
 
-Spec-driven development (SDD, "desarrollo dirigido por especificacion") es un flujo de trabajo en el que la especificacion escrita —no el prompt suelto ni el codigo— se trata como el artefacto principal y ejecutable del proyecto: los agentes generan, prueban y validan el código a partir de ese documento, en vez de que el documento sea una formalidad posterior. GitHub lo resume así en el anuncio de su herramienta Spec Kit (02-09-2025): la especificación se convierte en "la fuente de verdad compartida" que agentes como GitHub Copilot, Claude Code o Gemini CLI usan durante todo el desarrollo, en lugar de una instrucción de una sola vez que se descarta tras usarla.
+Spec-driven development (SDD, "desarrollo dirigido por especificación") es un flujo de trabajo en el que la especificación escrita —no el prompt suelto ni el código— se trata como el artefacto principal y ejecutable del proyecto: los agentes generan, prueban y validan el código a partir de ese documento, en vez de que el documento sea una formalidad posterior. GitHub lo resume así en el anuncio de su herramienta Spec Kit (02-09-2025): la especificación se convierte en "la fuente de verdad compartida" que agentes como GitHub Copilot, Claude Code o Gemini CLI usan durante todo el desarrollo, en lugar de una instrucción de una sola vez que se descarta tras usarla.
 
 El motivo declarado por quienes lo promueven es el mismo diagnóstico que separa "vibe coding" de "ingeniería agéntica": un agente que solo recibe una descripción vaga del objetivo produce código que "parece correcto pero no funciona del todo", en palabras del post de GitHub, porque a los agentes hay que darles instrucciones sin ambigüedad, no tratarlos como un buscador al que se le pide algo y se acepta lo que devuelve.
 

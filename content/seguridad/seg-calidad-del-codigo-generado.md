@@ -16,7 +16,7 @@ confidence: media
 
 ## Por qué importa
 
-Un equipo pequeño que decide cuánta revisión humana exigirle al código que sale de un agente necesita saber si "en general el código de IA es inseguro" es una exageración de marketing o un hallazgo estable. La respuesta, con la evidencia disponible en septiembre de 2026, es intermedia: el patrón se repite en estudios con metodologías independientes entre sí (dos papers académicos de 2021-2023 sin relación con ningún proveedor ya encontraban tasas de vulnerabilidad de 40-mitad de las muestras), pero la cifra exacta —45%, 40%, "la mitad de los programas correctos"— depende tanto del estudio que la citás casi no tiene sentido tratarla como una constante universal.
+Un equipo pequeño que decide cuánta revisión humana exigirle al código que sale de un agente necesita saber si "en general el código de IA es inseguro" es una exageración de marketing o un hallazgo estable. La respuesta, con la evidencia disponible en septiembre de 2026, es intermedia: el patrón se repite en estudios con metodologías independientes entre sí (dos papers académicos de 2021-2023 sin relación con ningún proveedor ya encontraban tasas de vulnerabilidad de entre el 40% y la mitad de las muestras), pero la cifra exacta —45%, 40%, "la mitad de los programas correctos"— depende tanto de qué estudio se cite que casi no tiene sentido tratarla como una constante universal.
 
 ## Datos
 
