@@ -509,3 +509,6 @@ h1.doc-title {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; border: 2px solid var(--bg); }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+.related { margin-top: 42px; padding-top: 4px; border-top: 1px solid var(--border); }
+.related h2 { font-size: 15px; font-weight: 640; margin: 18px 0 12px; color: var(--text-dim); }

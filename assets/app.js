@@ -373,6 +373,30 @@
     md.innerHTML = window.MD.render(d.body);
     wrap.appendChild(md);
 
+    // Fichas relacionadas: mismo tema, priorizando etiquetas compartidas.
+    var related = DOCS.filter(function (x) { return x.id !== d.id && x.track === d.track; })
+      .map(function (x) {
+        var shared = x.tags.filter(function (t) { return d.tags.indexOf(t) >= 0; }).length;
+        return { doc: x, score: shared };
+      })
+      .sort(function (a, b) { return b.score - a.score || (b.doc.updated || '').localeCompare(a.doc.updated || ''); })
+      .slice(0, 4);
+
+    if (related.length) {
+      var rel = el('div', 'related');
+      rel.appendChild(el('h2', '', 'Seguir por aquí'));
+      var rl = el('div', 'pick-list');
+      related.forEach(function (r) {
+        var b = el('button', 'pick');
+        b.innerHTML = '<b>' + esc(r.doc.title) + '</b><span>' + r.doc.minutes + ' min · ' +
+          r.doc.sources.length + ' fuentes · ' + esc(TYPE_LABEL[r.doc.type] || r.doc.type) + '</span>';
+        b.onclick = function () { state.mobilePane = 'reader'; go('#/d/' + r.doc.id); };
+        rl.appendChild(b);
+      });
+      rel.appendChild(rl);
+      wrap.appendChild(rel);
+    }
+
     // Botones de copiar en los bloques de código.
     Array.prototype.forEach.call(md.querySelectorAll('pre'), function (pre) {
       var btn = pre.querySelector('.copy-btn');
@@ -625,14 +649,34 @@
     } else if (state.view === 'list') {
       var t = state.track ? trackOf(state.track) : null;
       var w = el('div', 'pane');
+      var shown = filtered();
       if (t) {
         w.appendChild(el('h1', '', t.label));
         w.appendChild(el('p', 'lede', t.desc));
       } else {
         w.appendChild(el('h1', '', 'Todas las fichas'));
-        w.appendChild(el('p', 'lede', 'Elige una de la lista para leerla.'));
+        w.appendChild(el('p', 'lede', 'Elige una de la lista para empezar a leer.'));
       }
-      w.appendChild(el('p', 'lede', 'Selecciona una ficha en la columna de la izquierda.'));
+      if (shown.length) {
+        var srcTotal = shown.reduce(function (a, x) { return a + x.sources.length; }, 0);
+        var mins = shown.reduce(function (a, x) { return a + x.minutes; }, 0);
+        var st = el('div', 'stats');
+        [[shown.length, 'fichas aquí'], [srcTotal, 'fuentes citadas'], [mins + ' min', 'de lectura']]
+          .forEach(function (s) {
+            var n = el('div', 'stat');
+            n.innerHTML = '<div class="v">' + esc(String(s[0])) + '</div><div class="k">' + esc(s[1]) + '</div>';
+            st.appendChild(n);
+          });
+        w.appendChild(st);
+        var picks = el('div', 'pick-list');
+        shown.slice(0, 8).forEach(function (d) {
+          var b = el('button', 'pick');
+          b.innerHTML = '<b>' + esc(d.title) + '</b><span>' + esc(d.summary) + '</span>';
+          b.onclick = function () { state.mobilePane = 'reader'; go('#/d/' + d.id); };
+          picks.appendChild(b);
+        });
+        w.appendChild(picks);
+      }
       reader.appendChild(w);
     } else {
       reader.appendChild(renderHome());
