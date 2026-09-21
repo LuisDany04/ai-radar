@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Genera assets/data.js (bundle que consume el panel) y content/index.json (índice legible).
 # No necesita Node ni Python: solo bash, awk, base64 y sed.
-set -euo pipefail
+#
+# La validación y el índice se hacen en UNA sola pasada de awk sobre todas las fichas.
+# Un bucle de bash con sustituciones por archivo tardaba más de dos minutos en Windows,
+# donde lanzar procesos es caro.
+set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -10,158 +14,184 @@ NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 TODAY="$(date -u +%Y-%m-%d)"
 OUT_JS="assets/data.js"
 OUT_JSON="content/index.json"
-REQUIRED="id title track type level tags summary updated reading_minutes source_span confidence"
-VALID_TRACKS="claude-code skills mcp modelos herramientas practicas tendencias seguridad"
-VALID_TYPES="guia feature opinion dato comparativa ejemplo release herramienta"
 
-errors=0
-warnings=0
-count=0
+shopt -s nullglob
+FILES=(content/*/*.md)
+shopt -u nullglob
 
-# --- Validación -------------------------------------------------------------
-echo "==> Validando fichas"
-for f in content/*/*.md; do
-  [ -e "$f" ] || continue
-  count=$((count + 1))
-  base="$(basename "$f" .md)"
-  dir="$(basename "$(dirname "$f")")"
+if [ "${#FILES[@]}" -eq 0 ]; then
+  echo "No hay fichas en content/. Nada que construir."
+  exit 0
+fi
 
-  if [ "$(head -n 1 "$f")" != "---" ]; then
-    echo "  ERROR $f: no empieza con '---' (falta frontmatter)"
-    errors=$((errors + 1))
-    continue
-  fi
+# ---------------------------------------------------------------------------
+# Validación + índice, en una sola pasada
+# ---------------------------------------------------------------------------
+echo "==> Validando ${#FILES[@]} fichas"
 
-  fm="$(awk 'NR==1&&/^---$/{inside=1;next} inside&&/^---$/{exit} inside{print}' "$f")"
+awk -v now="$NOW" -v outjson="$OUT_JSON" '
+  function esc(s,   i, c, out) {
+    out = ""
+    for (i = 1; i <= length(s); i++) {
+      c = substr(s, i, 1)
+      if (c == "\\") out = out "\\\\"
+      else if (c == "\"") out = out "\\\""
+      else if (c == "\t") out = out "\\t"
+      else if (c == "\r") continue
+      else out = out c
+    }
+    return out
+  }
+  function unquote(v) {
+    if (substr(v, 1, 1) == "\"") v = substr(v, 2)
+    if (substr(v, length(v), 1) == "\"") v = substr(v, 1, length(v) - 1)
+    return v
+  }
+  function err(msg) { print "  ERROR " FILENAME ": " msg; errors++ }
+  function warn(msg) { print "  AVISO " FILENAME ": " msg; warnings++ }
 
-  for key in $REQUIRED; do
-    if ! printf '%s\n' "$fm" | grep -q "^${key}:"; then
-      echo "  ERROR $f: falta la clave obligatoria '$key'"
-      errors=$((errors + 1))
-    fi
-  done
+  BEGIN {
+    split("id title track type level tags summary updated reading_minutes source_span confidence", REQ, " ")
+    TRACKS = " claude-code skills mcp modelos herramientas practicas tendencias seguridad "
+    TYPES  = " guia feature opinion dato comparativa ejemplo release herramienta "
+    # Palabras que en español SIEMPRE llevan tilde. Sin pares ambiguos (que/qué, como/cómo).
+    ACC = "configuracion|suscripcion|ejecucion|revision|documentacion|informacion|aplicacion|" \
+          "integracion|automatizacion|verificacion|comparacion|evaluacion|generacion|migracion|" \
+          "adopcion|codigo|analisis|metrica|linea|ingenieria|economia|energia|categoria|" \
+          "compania|estandar|ademas|segun|tambien|practicamente|automaticamente"
+    printf "" > outjson
+    jfirst = 1
+    count = 0; errors = 0; warnings = 0; orto = 0; totsrc = 0
+  }
 
-  fm_id="$(printf '%s\n' "$fm" | sed -n 's/^id:[[:space:]]*//p' | head -n1 | tr -d '"'"'"'\r')"
-  fm_track="$(printf '%s\n' "$fm" | sed -n 's/^track:[[:space:]]*//p' | head -n1 | tr -d '"'"'"'\r')"
-  fm_type="$(printf '%s\n' "$fm" | sed -n 's/^type:[[:space:]]*//p' | head -n1 | tr -d '"'"'"'\r')"
+  FNR == 1 {
+    if (NR > 1) finish()
+    delete fm
+    n = split(FILENAME, seg, "/")
+    base = seg[n]; sub(/\.md$/, "", base)
+    dir = seg[n - 1]
+    inside = 0; done_fm = 0; has_src_head = 0; nsrc = 0; has_seen = 0; accwords = ""
+    count++
+    if ($0 !~ /^---[[:space:]]*$/) err("no empieza con --- (falta frontmatter)")
+    else inside = 1
+    next
+  }
 
-  [ "$fm_id" = "$base" ] || { echo "  ERROR $f: id '$fm_id' != nombre de archivo '$base'"; errors=$((errors + 1)); }
-  [ "$fm_track" = "$dir" ] || { echo "  ERROR $f: track '$fm_track' != carpeta '$dir'"; errors=$((errors + 1)); }
+  {
+    if (inside && !done_fm) {
+      if ($0 ~ /^---[[:space:]]*$/) { done_fm = 1; next }
+      p = index($0, ":")
+      if (p > 0) {
+        k = substr($0, 1, p - 1)
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", k)
+        v = substr($0, p + 1)
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", v)
+        fm[k] = unquote(v)
+      }
+      next
+    }
+    if ($0 ~ /^##[[:space:]]+Fuentes[[:space:]]*$/) has_src_head = 1
+    if ($0 ~ /^-[[:space:]]*\[.*\]\(http/) nsrc++
+    if ($0 ~ /visto:[[:space:]]*[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/) has_seen = 1
+    line = tolower($0)
+    while (match(line, "(^|[^a-záéíóúñ])(" ACC ")([^a-záéíóúñ]|$)")) {
+      w = substr(line, RSTART, RLENGTH)
+      gsub(/[^a-z]/, "", w)
+      if (index(accwords, " " w " ") == 0) accwords = accwords " " w " "
+      line = substr(line, RSTART + RLENGTH)
+    }
+  }
 
-  case " $VALID_TRACKS " in *" $fm_track "*) ;; *) echo "  ERROR $f: track '$fm_track' no es válido"; errors=$((errors + 1));; esac
-  case " $VALID_TYPES " in *" $fm_type "*) ;; *) echo "  ERROR $f: type '$fm_type' no es válido"; errors=$((errors + 1));; esac
+  function finish(   i, k, miss) {
+    # Claves obligatorias
+    for (i in REQ) if (!(REQ[i] in fm)) err("falta la clave obligatoria \"" REQ[i] "\"")
 
-  grep -q '^## Fuentes' "$f" || { echo "  ERROR $f: falta la sección '## Fuentes'"; errors=$((errors + 1)); }
+    if (fm["id"] != "" && fm["id"] != base) err("id \"" fm["id"] "\" != nombre de archivo \"" base "\"")
+    if (fm["track"] != "" && fm["track"] != dir) err("track \"" fm["track"] "\" != carpeta \"" dir "\"")
+    if (fm["track"] != "" && index(TRACKS, " " fm["track"] " ") == 0) err("track \"" fm["track"] "\" no válido")
+    if (fm["type"] != "" && index(TYPES, " " fm["type"] " ") == 0) err("type \"" fm["type"] "\" no válido")
+    if (fm["updated"] != "" && fm["updated"] !~ /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/) err("updated \"" fm["updated"] "\" no es YYYY-MM-DD")
 
-  n_src="$(grep -c '^- \[.*](http' "$f" || true)"
-  if [ "$n_src" -lt 4 ]; then
-    echo "  AVISO $f: solo $n_src fuentes con enlace (el mínimo son 4)"
-    warnings=$((warnings + 1))
-  fi
+    if (!has_src_head) err("falta la sección \"## Fuentes\"")
+    if (nsrc < 4) warn("solo " nsrc " fuentes enlazadas (el mínimo son 4)")
+    if (nsrc > 0 && !has_seen) warn("ninguna fuente lleva \"visto: YYYY-MM-DD\"")
+    if (length(fm["summary"]) > 300) warn("summary de " length(fm["summary"]) " caracteres (el tope son 280)")
+    if (accwords != "") { print "  ORTO  " FILENAME ":" accwords; orto++; warnings++ }
 
-  if grep -q '^- \[.*](http' "$f" && ! grep -q 'visto: [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' "$f"; then
-    echo "  AVISO $f: ninguna fuente lleva 'visto: YYYY-MM-DD'"
-    warnings=$((warnings + 1))
-  fi
-done
+    # ids duplicados
+    if (fm["id"] in seenid) err("id duplicado, ya usado en " seenid[fm["id"]])
+    else seenid[fm["id"]] = FILENAME
 
-echo "    $count fichas, $errors errores, $warnings avisos"
-if [ "$errors" -gt 0 ]; then
-  echo "==> Build abortado por errores de validación."
+    totsrc += nsrc
+
+    # Fila del índice
+    if (jfirst) { jfirst = 0 } else { printf ",\n" >> outjson }
+    printf "    {\"id\":\"%s\",\"title\":\"%s\",\"track\":\"%s\",\"type\":\"%s\",\"level\":\"%s\",\"tags\":\"%s\",\"summary\":\"%s\",\"updated\":\"%s\",\"reading_minutes\":\"%s\",\"source_span\":\"%s\",\"confidence\":\"%s\",\"sources\":%d,\"path\":\"%s\"}",
+      esc(fm["id"]), esc(fm["title"]), esc(fm["track"]), esc(fm["type"]), esc(fm["level"]),
+      esc(fm["tags"]), esc(fm["summary"]), esc(fm["updated"]), esc(fm["reading_minutes"]),
+      esc(fm["source_span"]), esc(fm["confidence"]), nsrc, esc(FILENAME) >> outjson
+  }
+
+  END {
+    finish()
+    printf "\n" >> outjson
+    close(outjson)
+    print "    " count " fichas, " errors " errores, " warnings " avisos" > "/dev/stderr"
+    if (orto > 0) print "    " orto " fichas con palabras sin tilde (aviso, no bloquea)" > "/dev/stderr"
+    print count "\t" errors "\t" totsrc > "/dev/stderr"
+    exit (errors > 0 ? 1 : 0)
+  }
+' "${FILES[@]}" 2> "$ROOT/.build-stats"
+
+rc=$?
+stats="$(tail -n 1 "$ROOT/.build-stats")"
+head -n -1 "$ROOT/.build-stats"
+rm -f "$ROOT/.build-stats"
+
+COUNT="$(printf '%s' "$stats" | cut -f1)"
+ERRORS="$(printf '%s' "$stats" | cut -f2)"
+TOTSRC="$(printf '%s' "$stats" | cut -f3)"
+
+if [ "$rc" -ne 0 ]; then
+  echo "==> Build abortado: hay errores de validación."
+  rm -f "$OUT_JSON"
   exit 1
 fi
 
-# --- Duplicados de id -------------------------------------------------------
-dupes="$(for f in content/*/*.md; do [ -e "$f" ] && basename "$f" .md; done | sort | uniq -d || true)"
-if [ -n "$dupes" ]; then
-  echo "==> ERROR: ids duplicados:"; printf '%s\n' "$dupes"; exit 1
-fi
+# Envolver el índice que awk dejó a medio escribir.
+{
+  echo "{"
+  echo "  \"generated\": \"$NOW\","
+  echo "  \"count\": $COUNT,"
+  echo "  \"docs\": ["
+  cat "$OUT_JSON"
+  echo "  ]"
+  echo "}"
+} > "$OUT_JSON.tmp" && mv "$OUT_JSON.tmp" "$OUT_JSON"
 
-# --- Bundle JS --------------------------------------------------------------
-# Cada ficha se empaqueta en base64: así el markdown (con comillas, backticks,
-# acentos y bloques de código) viaja intacto sin ningún escapado frágil en bash.
+# ---------------------------------------------------------------------------
+# Bundle JS
+# ---------------------------------------------------------------------------
+# Cada ficha viaja en base64: así el markdown (con comillas, backticks, acentos
+# y bloques de código) llega intacto sin ningún escapado frágil en bash.
 echo "==> Generando $OUT_JS"
 {
   echo "/* Generado por scripts/build.sh — no editar a mano. */"
   echo "window.__RADAR__ = {"
   echo "  generated: \"$NOW\","
   echo "  docs: ["
-  for f in content/*/*.md; do
-    [ -e "$f" ] || continue
+  for f in "${FILES[@]}"; do
     printf '    {"path":"%s","b64":"%s"},\n' "$f" "$(base64 -w0 "$f")"
   done
   echo "  ]"
   echo "};"
 } > "$OUT_JS"
 
-# --- Índice JSON ------------------------------------------------------------
-echo "==> Generando $OUT_JSON"
-{
-  echo "{"
-  echo "  \"generated\": \"$NOW\","
-  echo "  \"count\": $count,"
-  echo "  \"docs\": ["
-  first=1
-  for f in content/*/*.md; do
-    [ -e "$f" ] || continue
-    [ $first -eq 1 ] && first=0 || echo "    ,"
-    awk -v path="$f" '
-      function esc(s,   i, c, out) {
-        out = ""
-        for (i = 1; i <= length(s); i++) {
-          c = substr(s, i, 1)
-          if (c == "\\") out = out "\\\\"
-          else if (c == "\"") out = out "\\\""
-          else if (c == "\t") out = out "\t"
-          else if (c == "\r") continue
-          else out = out c
-        }
-        return out
-      }
-      function val(line,   v) {
-        v = line
-        sub(/^[A-Za-z_]+:[ \t]*/, "", v)
-        if (substr(v, 1, 1) == "\"") v = substr(v, 2)
-        if (substr(v, length(v), 1) == "\"") v = substr(v, 1, length(v) - 1)
-        return esc(v)
-      }
-      NR == 1 && /^---$/ { inside = 1; next }
-      inside && /^---$/ { exit }
-      inside {
-        p = index($0, ":")
-        if (p == 0) next
-        k = substr($0, 1, p - 1)
-        if (k == "id") id = val($0)
-        else if (k == "title") title = val($0)
-        else if (k == "track") track = val($0)
-        else if (k == "type") type = val($0)
-        else if (k == "level") level = val($0)
-        else if (k == "tags") tags = val($0)
-        else if (k == "summary") summary = val($0)
-        else if (k == "updated") updated = val($0)
-        else if (k == "reading_minutes") mins = val($0)
-        else if (k == "source_span") span = val($0)
-        else if (k == "confidence") conf = val($0)
-      }
-      END {
-        printf "    {\"id\":\"%s\",\"title\":\"%s\",\"track\":\"%s\",\"type\":\"%s\",\"level\":\"%s\",", id, title, track, type, level
-        printf "\"tags\":\"%s\",\"summary\":\"%s\",\"updated\":\"%s\",\"reading_minutes\":\"%s\",", tags, summary, updated, mins
-        printf "\"source_span\":\"%s\",\"confidence\":\"%s\",\"path\":\"%s\"}\n", span, conf, path
-      }
-    ' "$f"
-  done
-  echo "  ]"
-  echo "}"
-} > "$OUT_JSON"
-
-# --- Recuento de fuentes ----------------------------------------------------
-total_src="$(cat content/*/*.md 2>/dev/null | grep -c '^- \[.*](http' || true)"
-uniq_src="$(cat content/*/*.md 2>/dev/null | grep -o '](https\?://[^)]*)' | sort -u | wc -l | tr -d ' ')"
+UNIQSRC="$(grep -ho '](https\?://[^)]*)' "${FILES[@]}" 2>/dev/null | sort -u | wc -l | tr -d ' ')"
 
 echo ""
 echo "==> Listo — $TODAY"
-echo "    fichas:            $count"
-echo "    fuentes citadas:   $total_src ($uniq_src URLs únicas)"
+echo "    fichas:            $COUNT"
+echo "    fuentes citadas:   $TOTSRC ($UNIQSRC URLs únicas)"
 echo "    bundle:            $(du -k "$OUT_JS" | cut -f1) KB"
-[ "$warnings" -gt 0 ] && echo "    avisos:            $warnings (revisa arriba)"
 exit 0

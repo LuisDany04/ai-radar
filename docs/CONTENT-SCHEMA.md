@@ -120,3 +120,23 @@ claude --help
 
 - [Título](https://ejemplo.com/pagina) — Publicador — pub: 2026-01-10 — visto: 2026-09-19
 ```
+
+## Ortografía
+
+El contenido va en **español correcto, con acentos**. Es el fallo más frecuente al
+generar estas fichas: se escriben títulos como "Configuracion de Claude Code: que es y
+como se usa" en lugar de "Configuración de Claude Code: qué es y cómo se usa".
+
+Presta atención especial a:
+
+- Sustantivos en `-ción`: configuración, versión, revisión, suscripción, ejecución.
+- Interrogativos e indirectos: **qué**, **cómo**, **cuándo**, **cuánto**, **dónde**,
+  **por qué**. Van con tilde también en frases enunciativas
+  ("explica **qué** hace" y "depende de **cómo** lo uses").
+- Esdrújulas: código, análisis, métrica, práctica, técnica, automática, básica, crítica,
+  línea, límite, último, rápido, público.
+- Terminaciones en `-ía`: ingeniería, economía, energía, garantía, categoría.
+- Otras frecuentes: día, más, está, así, aquí, también, según, además, sólo/solo, estándar.
+
+`scripts/build.sh` avisa (sin abortar) cuando detecta palabras que siempre llevan tilde
+escritas sin ella. El aviso no es exhaustivo: revisa el texto.

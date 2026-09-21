@@ -8,7 +8,7 @@ tags: release, changelog, historial, modelos
 summary: "De la v2.0.76 a la v2.1.278: worktrees, auto mode por defecto, tres generaciones de modelos (Opus 4.6 a 5, Sonnet 5, Fable 5.1) y la fusion de slash commands con skills, con fecha y version exactas de cada hito."
 updated: 2026-09-20
 reading_minutes: 9
-source_span: 2026-01-07..2026-09-19
+source_span: 2026-05-06..2026-09-19
 confidence: alta
 ---
 

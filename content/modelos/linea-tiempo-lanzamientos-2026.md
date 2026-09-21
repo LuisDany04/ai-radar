@@ -43,6 +43,8 @@ En ocho meses (febrero a septiembre de 2026), los cuatro laboratorios grandes la
 ## Fuentes
 
 - [Gemini 3.1 Pro: A smarter model for your most complex tasks](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/) — Google — pub: 2026-02-19 — visto: 2026-09-20
+- [Introducing Muse Spark: Scaling Towards Personal Superintelligence](https://ai.meta.com/blog/introducing-muse-spark-msl/) — Meta — pub: 2026-04-08 — visto: 2026-09-20
+- [Claude Fable 5 and Claude Mythos 5](https://www.anthropic.com/news/claude-fable-5-mythos-5) — Anthropic — pub: 2026-06-09 — visto: 2026-09-20
 - [Introducing Claude Fable 5.1 and Claude Mythos 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1) — Anthropic — pub: 2026-09-01 — visto: 2026-09-20
 - [Anthropic upgrades Claude with new Fable 5.1 model, details here](https://9to5mac.com/2026/09/01/anthropic-upgrades-claude-with-new-fable-5-1-model-details-here/) — 9to5Mac — pub: 2026-09-01 — visto: 2026-09-20
 - [Introducing Grok 4.6](https://x.ai/news/grok-4-6) — xAI — pub: 2026-08-12 — visto: 2026-09-20
