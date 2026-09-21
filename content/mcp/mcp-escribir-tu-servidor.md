@@ -30,14 +30,14 @@ Tier 1 reduce el riesgo de quedarte con una versión vieja del protocolo.
 |---|---|---|---|
 | TypeScript | 1 | `modelcontextprotocol/typescript-sdk` | 13.439 |
 | Python | 1 | `modelcontextprotocol/python-sdk` | 24.353 |
-| C# | 1 | `modelcontextprotocol/csharp-sdk` | — |
-| Go | 1 | `modelcontextprotocol/go-sdk` | — |
-| Rust | 1 | `modelcontextprotocol/rust-sdk` | — |
-| Java | 2 | `modelcontextprotocol/java-sdk` | — |
-| Ruby | 2 | `modelcontextprotocol/ruby-sdk` | — |
-| Swift | 3 | `modelcontextprotocol/swift-sdk` | — |
-| PHP | 3 | `modelcontextprotocol/php-sdk` | — |
-| Kotlin | 3 | `modelcontextprotocol/kotlin-sdk` | — |
+| C# | 1 | `modelcontextprotocol/csharp-sdk` | 4.537 |
+| Go | 1 | `modelcontextprotocol/go-sdk` | 5.130 |
+| Rust | 1 | `modelcontextprotocol/rust-sdk` | 3.946 |
+| Java | 2 | `modelcontextprotocol/java-sdk` | 3.705 |
+| Ruby | 2 | `modelcontextprotocol/ruby-sdk` | 914 |
+| Swift | 3 | `modelcontextprotocol/swift-sdk` | 1.495 |
+| PHP | 3 | `modelcontextprotocol/php-sdk` | 1.615 |
+| Kotlin | 3 | `modelcontextprotocol/kotlin-sdk` | 1.462 |
 | MCP Inspector (herramienta de prueba) | — | `modelcontextprotocol/inspector` | 10.917 |
 
 ## Ejemplo
