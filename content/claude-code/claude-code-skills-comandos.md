@@ -1,11 +1,11 @@
 ---
 id: claude-code-skills-comandos
-title: "Skills y slash commands en Claude Code: se fusionaron en un solo formato"
+title: "Skills y slash commands en Claude Code: hoy son el mismo mecanismo"
 track: claude-code
 type: guia
 level: intermedio
 tags: skills, slash-commands, comandos, personalizacion
-summary: "Desde la v2.1.199 (julio 2026) los slash commands personalizados y los skills son el mismo mecanismo: un SKILL.md con frontmatter. Los .claude/commands/*.md viejos siguen funcionando, pero el formato nuevo es SKILL.md con carpeta propia."
+summary: "La documentación oficial declara que los slash commands personalizados y los skills son el mismo mecanismo: un SKILL.md con frontmatter. Los .claude/commands/*.md viejos siguen funcionando, pero el formato nuevo es SKILL.md con carpeta propia."
 updated: 2026-09-20
 reading_minutes: 7
 source_span: 2026-07-02..2026-09-18
@@ -55,12 +55,12 @@ Campos de frontmatter confirmados de forma literal en `code.claude.com/docs/en/s
 
 | Dato | Valor | Fuente |
 |---|---|---|
-| Versión desde la que los slash commands son, formalmente, skills | v2.1.199 | GitHub release v2.1.199, 2026-07-02 |
+| Versión que introdujo el encadenado de skills en una sola línea | v2.1.199 | CHANGELOG de anthropics/claude-code, 2026-07-02 |
 | Límite de caracteres de `description` + `when_to_use` combinados antes de truncarse en el listado | 1.536 caracteres | code.claude.com/docs/en/skills, 2026-09-17 |
 | Máximo de skills encadenables en una sola invocación | 6 | code.claude.com/docs/en/commands, 2026-09-18 |
 | Límite recomendado de tamaño de un `SKILL.md` | 500 líneas (mover el resto a archivos de soporte) | code.claude.com/docs/en/skills, 2026-09-17 |
 
-> [!duda] La documentación no fecha explícitamente cuándo se introdujo cada campo del frontmatter (por ejemplo `compatibility` o `license`, ligados a la especificación externa Agent Skills). Solo pudimos confirmar con fecha la fusión commands→skills (v2.1.199) y el requisito de v2.1.218 para `background: false` en skills con `context: fork`.
+> [!duda] La fusión commands→skills **no tiene fecha pública**. La afirma la documentación oficial, que no lleva fecha de publicación, y no aparece como entrada fechada en el CHANGELOG del repositorio: la v2.1.199 (2026-07-02) introdujo el encadenado de skills, que es otra cosa. Tampoco está fechado cuándo se introdujo cada campo del frontmatter (`compatibility`, `license`). Lo único confirmado con versión y fecha es el encadenado (v2.1.199) y el requisito de v2.1.218 para `background: false` en skills con `context: fork`.
 
 ## Cómo empezar
 
