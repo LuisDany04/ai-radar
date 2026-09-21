@@ -69,7 +69,7 @@ Más allá de Superpowers, la otra forma de "colección comunitaria grande" son 
 
 1. Antes de instalar una colección grande completa, lee qué skills incluye — muchas se disparan automáticamente por descripción y compiten por el mismo contexto.
 2. Si solo te interesa la metodología (TDD, planning), instala Superpowers desde el marketplace oficial (`@claude-plugins-official`) para evitar forks no mantenidos.
-3. Si buscás una skill puntual, las listas "awesome" son mejores como catálogo de búsqueda que como paquete para instalar entero.
+3. Si buscas una skill puntual, las listas "awesome" son mejores como catálogo de búsqueda que como paquete para instalar entero.
 4. Corre `/skill-doctor` en Claude Code (v2.1.252+) para ver qué skills instaladas realmente se están usando y cuánto contexto consumen antes de decidir qué desinstalar.
 
 ## Fuentes

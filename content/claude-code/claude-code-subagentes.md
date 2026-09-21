@@ -1,6 +1,6 @@
 ---
 id: claude-code-subagentes
-title: "Subagentes en Claude Code: cuando delegar y cuando no"
+title: "Subagentes en Claude Code: cuándo delegar y cuándo no"
 track: claude-code
 type: guia
 level: avanzado
@@ -54,11 +54,11 @@ Campos de frontmatter reales confirmados en la documentación (hay más de veint
 
 ## Cómo empezar
 
-1. Pedile a Claude en lenguaje natural que cree el subagente: "Creá un subagente de solo lectura en `~/.claude/agents/` para revisar código, usando Sonnet."
-2. O escribí el archivo `.md` a mano en `.claude/agents/` (proyecto, versionable) o `~/.claude/agents/` (personal).
-3. Restringí `tools` al mínimo necesario — es la forma más simple de evitar que un subagente de investigación termine editando archivos.
-4. Invocalo con @-mención (`@"nombre-agente (agent)"`) para garantizar que se ejecute, en vez de dejar que Claude decida solo.
-5. Si la tarea necesita ida y vuelta iterativa o comparte contexto entre fases, quedate en la conversación principal: ahí los subagentes agregan latencia sin beneficio.
+1. Pídele a Claude en lenguaje natural que cree el subagente: "Crea un subagente de solo lectura en `~/.claude/agents/` para revisar código, usando Sonnet."
+2. O escribe el archivo `.md` a mano en `.claude/agents/` (proyecto, versionable) o `~/.claude/agents/` (personal).
+3. Restringe `tools` al mínimo necesario — es la forma más simple de evitar que un subagente de investigación termine editando archivos.
+4. Invócalo con @-mención (`@"nombre-agente (agent)"`) para garantizar que se ejecute, en vez de dejar que Claude decida solo.
+5. Si la tarea necesita ida y vuelta iterativa o comparte contexto entre fases, quédate en la conversación principal: ahí los subagentes agregan latencia sin beneficio.
 
 ## Fuentes
 

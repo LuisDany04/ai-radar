@@ -1,11 +1,11 @@
 ---
 id: cc-uso-verificacion
-title: "Verificar lo que Claude Code produce: tests, revision adversarial y el debate sobre cuanto revisar"
+title: "Verificar lo que Claude Code produce: tests, revisión adversarial y el debate sobre cuánto revisar"
 track: claude-code
 type: guia
 level: intermedio
 tags: verificacion, revision de codigo, testing, calidad
-summary: "Anthropic dice que dar a Claude una forma de verificar su propio trabajo es la practica mas importante de todas. El debate real es cuanta revision humana sigue haciendo falta despues."
+summary: "Anthropic dice que dar a Claude una forma de verificar su propio trabajo es la práctica más importante de todas. El debate real es cuánta revisión humana sigue haciendo falta después."
 updated: 2026-09-20
 reading_minutes: 7
 source_span: 2026-03-09..2026-07-22

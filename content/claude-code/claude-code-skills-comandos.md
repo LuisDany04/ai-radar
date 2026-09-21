@@ -39,7 +39,7 @@ Resumi los cambios de arriba en 2-3 puntos, despues listá riesgos como
 manejo de errores faltante o valores hardcodeados.
 ```
 
-Se invoca con `/summarize-changes`, o Claude lo carga solo si el `description` matchea lo que le estás pidiendo. El bloque `` !`comando` `` corre en tu máquina antes de que Claude vea el contenido, y si el comando falla (exit code distinto de cero) aborta todo el skill.
+Se invoca con `/summarize-changes`, o Claude lo carga solo si el `description` coincide con lo que le estás pidiendo. El bloque `` !`comando` `` corre en tu máquina antes de que Claude vea el contenido, y si el comando falla (exit code distinto de cero) aborta todo el skill.
 
 Encadenar varios skills en una sola línea (soportado desde v2.1.199, fecha 2026-07-02 según el release de GitHub):
 
@@ -64,11 +64,11 @@ Campos de frontmatter confirmados de forma literal en `code.claude.com/docs/en/s
 
 ## Cómo empezar
 
-1. Si venís de `.claude/commands/`, no hace falta migrar nada: sigue funcionando igual.
-2. Para un skill nuevo, creá una carpeta `nombre-skill/SKILL.md` (no un archivo suelto) si vas a necesitar archivos de referencia o scripts al lado.
-3. Usá `disable-model-invocation: true` cuando quieras que el skill solo se dispare a mano con `/nombre`, nunca solo.
-4. Usá `context: fork` cuando el skill deba correr en un subagente aislado (por ejemplo, una investigación larga que no debe ensuciar el contexto principal).
-5. Corré `/skill-doctor` (donde esté disponible) para ver cuánto contexto cuesta cada skill y qué tan seguido se usa.
+1. Si vienes de `.claude/commands/`, no hace falta migrar nada: sigue funcionando igual.
+2. Para un skill nuevo, crea una carpeta `nombre-skill/SKILL.md` (no un archivo suelto) si vas a necesitar archivos de referencia o scripts al lado.
+3. Usa `disable-model-invocation: true` cuando quieras que el skill solo se dispare a mano con `/nombre`, nunca solo.
+4. Usa `context: fork` cuando el skill deba correr en un subagente aislado (por ejemplo, una investigación larga que no debe ensuciar el contexto principal).
+5. Ejecuta `/skill-doctor` (donde esté disponible) para ver cuánto contexto cuesta cada skill y qué tan seguido se usa.
 
 ## Fuentes
 

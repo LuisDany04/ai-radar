@@ -1,11 +1,11 @@
 ---
 id: cc-uso-paralelo
-title: "Trabajar en paralelo con Claude Code: worktrees, sesiones multiples y agentes en background"
+title: "Trabajar en paralelo con Claude Code: worktrees, sesiones múltiples y agentes en background"
 track: claude-code
 type: guia
 level: avanzado
 tags: worktrees, paralelismo, subagentes, productividad
-summary: "Git worktrees permite correr varias sesiones de Claude Code sin que se pisen los archivos. Los comandos reales y por que algunos desarrolladores con experiencia han dejado de usarlos."
+summary: "Git worktrees permite correr varias sesiones de Claude Code sin que se pisen los archivos. Los comandos reales y por qué algunos desarrolladores con experiencia han dejado de usarlos."
 updated: 2026-09-20
 reading_minutes: 7
 source_span: 2025-07-30..2025-10-30

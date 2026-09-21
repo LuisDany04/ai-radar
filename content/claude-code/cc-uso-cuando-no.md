@@ -1,6 +1,6 @@
 ---
 id: cc-uso-cuando-no
-title: "Cuando NO usar Claude Code: chat, Cowork y los limites de delegar"
+title: "Cuándo NO usar Claude Code: chat, Cowork y los límites de delegar"
 track: claude-code
 type: opinion
 level: intro

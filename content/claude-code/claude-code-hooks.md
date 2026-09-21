@@ -5,14 +5,14 @@ track: claude-code
 type: guia
 level: intermedio
 tags: automatizacion, hooks, configuracion, permisos
-summary: "Los hooks corren comandos deterministicos (o llamadas a un modelo) en puntos fijos del ciclo de vida de Claude Code: antes o despues de una tool, al iniciar sesion, al compactar, etc. Con eventos, formato JSON y ejemplos oficiales."
+summary: "Los hooks corren comandos determinísticos (o llamadas a un modelo) en puntos fijos del ciclo de vida de Claude Code: antes o después de una tool, al iniciar sesión, al compactar, etc. Con eventos, formato JSON y ejemplos oficiales."
 updated: 2026-09-20
 reading_minutes: 9
 source_span: 2026-09-11..2026-09-19
 confidence: alta
 ---
 
-Los hooks son comandos de shell (o, desde hace poco, prompts a un modelo o llamadas HTTP/MCP) que Claude Code ejecuta automáticamente en puntos fijos de su ciclo de vida: antes de usar una herramienta, después de editar un archivo, al iniciar sesión, al compactar contexto, etc. La diferencia con pedirle a Claude "siempre corré el linter después de editar" en un CLAUDE.md es que un hook se ejecuta sí o sí, sin depender de que el modelo decida hacerlo.
+Los hooks son comandos de shell (o, desde hace poco, prompts a un modelo o llamadas HTTP/MCP) que Claude Code ejecuta automáticamente en puntos fijos de su ciclo de vida: antes de usar una herramienta, después de editar un archivo, al iniciar sesión, al compactar contexto, etc. La diferencia con pedirle a Claude "siempre ejecuta el linter después de editar" en un CLAUDE.md es que un hook se ejecuta sí o sí, sin depender de que el modelo decida hacerlo.
 
 ## Por qué importa
 
@@ -98,11 +98,11 @@ Eventos de hooks disponibles según la referencia oficial (`code.claude.com/docs
 
 ## Cómo empezar
 
-1. Abrí `~/.claude/settings.json` (o `.claude/settings.json` para compartir con el equipo) y agregá un bloque `hooks` con al menos un evento.
-2. Corré `/hooks` dentro de una sesión para ver todos los hooks configurados, agrupados por evento — el menú es de solo lectura, la edición es en el archivo.
-3. Probá el hook disparando la acción correspondiente y mirá la transcripción con `Ctrl+O`, o activá logging con `claude --debug-file /tmp/claude.log`.
+1. Abre `~/.claude/settings.json` (o `.claude/settings.json` para compartir con el equipo) y agrega un bloque `hooks` con al menos un evento.
+2. Ejecuta `/hooks` dentro de una sesión para ver todos los hooks configurados, agrupados por evento — el menú es de solo lectura, la edición es en el archivo.
+3. Prueba el hook disparando la acción correspondiente y mira la transcripción con `Ctrl+O`, o activa logging con `claude --debug-file /tmp/claude.log`.
 4. Si el hook no corre, lo más común es un matcher mal escrito (son case-sensitive) o el script sin permiso de ejecución (`chmod +x`).
-5. Para decisiones que necesitan criterio en vez de una regla fija, usá `type: "prompt"` (una llamada a Haiku por defecto) o `type: "agent"` (un subagente con herramientas) en lugar de un script determinístico.
+5. Para decisiones que necesitan criterio en vez de una regla fija, usa `type: "prompt"` (una llamada a Haiku por defecto) o `type: "agent"` (un subagente con herramientas) en lugar de un script determinístico.
 
 ## Fuentes
 

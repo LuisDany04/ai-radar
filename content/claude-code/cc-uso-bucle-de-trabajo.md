@@ -5,7 +5,7 @@ track: claude-code
 type: guia
 level: intermedio
 tags: flujo de trabajo, verificacion, plan mode, buenas practicas
-summary: "Anthropic recomienda explorar y planificar antes de tocar código. Practicantes como Armin Ronacher y Birgitta Bockeler coinciden en el principio pero discrepan en cuanta autonomia darle al agente."
+summary: "Anthropic recomienda explorar y planificar antes de tocar código. Practicantes como Armin Ronacher y Birgitta Bockeler coinciden en el principio pero discrepan en cuánta autonomía darle al agente."
 updated: 2026-09-20
 reading_minutes: 6
 source_span: 2025-06-12..2026-06-23

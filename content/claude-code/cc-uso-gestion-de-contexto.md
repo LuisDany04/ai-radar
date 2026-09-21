@@ -1,11 +1,11 @@
 ---
 id: cc-uso-gestion-de-contexto
-title: "Gestionar el contexto en Claude Code: cuando compactar, cuando empezar de cero"
+title: "Gestionar el contexto en Claude Code: cuándo compactar, cuándo empezar de cero"
 track: claude-code
 type: guia
 level: intermedio
 tags: contexto, compactacion, sesiones, rendimiento
-summary: "El contexto que se acumula en una sesion larga degrada el rendimiento del modelo. Que dicen Anthropic y la investigacion de Chroma sobre cuando usar /compact, /clear o una sesion nueva."
+summary: "El contexto que se acumula en una sesión larga degrada el rendimiento del modelo. Qué dicen Anthropic y la investigación de Chroma sobre cuándo usar /compact, /clear o una sesión nueva."
 updated: 2026-09-20
 reading_minutes: 6
 source_span: 2025-07-14..2026-04-28

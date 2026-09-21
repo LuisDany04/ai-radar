@@ -68,7 +68,7 @@ Agent Skills quedó publicado como estándar abierto (agentskills.io) y, según 
 1. Si vas a distribuir una skill para múltiples superficies, súbela por separado a cada una (API, claude.ai, Claude Code): no hay sincronización automática.
 2. Antes de instalar una skill de un repositorio que no sea tuyo ni de Anthropic, léela completa — SKILL.md, scripts y cualquier recurso bundleado — buscando llamadas de red inesperadas o patrones de acceso a archivos que no calcen con lo que la skill dice hacer.
 3. Si tu organización es Enterprise, activa el escaneo de contenido de skills para las que se suben en claude.ai/Cowork; recuerda que no cubre subidas por API o consola.
-4. En el Agent SDK, si necesitás restringir qué puede invocar Claude, pasa una lista explícita en `skills=[...]` en vez de `"all"`.
+4. En el Agent SDK, si necesitas restringir qué puede invocar Claude, pasa una lista explícita en `skills=[...]` en vez de `"all"`.
 
 ## Fuentes
 

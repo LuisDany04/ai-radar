@@ -1,18 +1,18 @@
 ---
 id: claude-code-que-es-hoy
-title: "Que es Claude Code hoy: superficies, precios y en que se diferencia de un chat"
+title: "Qué es Claude Code hoy: superficies, precios y en qué se diferencia de un chat"
 track: claude-code
 type: feature
 level: intro
 tags: claude-code, overview, precios, ide, cli
-summary: "Claude Code ya no es solo una CLI: corre en terminal, VS Code, JetBrains, una app de escritorio y el navegador, todo sobre el mismo motor. Repasamos superficies, precios vigentes y que lo distingue de chatear con un modelo."
+summary: "Claude Code ya no es solo una CLI: corre en terminal, VS Code, JetBrains, una app de escritorio y el navegador, todo sobre el mismo motor. Repasamos superficies, precios vigentes y qué lo distingue de chatear con un modelo."
 updated: 2026-09-20
 reading_minutes: 7
 source_span: 2026-09-15..2026-09-20
 confidence: alta
 ---
 
-Claude Code es una herramienta de codificación agéntica: lee tu repositorio, edita archivos, corre comandos y se integra con tu flujo de trabajo, en vez de limitarse a responder texto. La documentación oficial lo resume así: "reads your codebase, edits files, runs commands, and integrates with your development tools." La diferencia con chatear con un modelo no es el modelo en sí (usa los mismos Claude por debajo), sino el bucle agéntico: Claude decide qué herramienta usar, la ejecuta, lee el resultado y sigue iterando sin que vos copies y pegues nada.
+Claude Code es una herramienta de codificación agéntica: lee tu repositorio, edita archivos, corre comandos y se integra con tu flujo de trabajo, en vez de limitarse a responder texto. La documentación oficial lo resume así: "reads your codebase, edits files, runs commands, and integrates with your development tools." La diferencia con chatear con un modelo no es el modelo en sí (usa los mismos Claude por debajo), sino el bucle agéntico: Claude decide qué herramienta usar, la ejecuta, lee el resultado y sigue iterando sin que tú copies y pegues nada.
 
 ## Por qué importa
 
@@ -33,7 +33,7 @@ Las cinco superficies oficiales, según `code.claude.com/docs/en/overview` (actu
 2. **VS Code**: extensión con diffs inline, @-menciones y revisión de planes; se instala desde el Marketplace o con `vscode:extension/anthropic.claude-code`.
 3. **JetBrains**: plugin (`plugins.jetbrains.com/plugin/27310-claude-code-beta-`) para IntelliJ, PyCharm, WebStorm y otros IDE de la familia; requiere la CLI instalada aparte.
 4. **App de escritorio**: standalone, con revisión visual de diffs, sesiones múltiples en paralelo y tareas programadas; requiere una suscripción paga.
-5. **Web**: en `claude.ai/code`, para lanzar tareas largas sin entorno local o trabajar en paralelo sobre repos que no tenés clonados.
+5. **Web**: en `claude.ai/code`, para lanzar tareas largas sin entorno local o trabajar en paralelo sobre repos que no tienes clonados.
 
 Todas comparten el mismo backend: "Each surface connects to the same underlying Claude Code engine, so your repo's CLAUDE.md files, settings, and MCP servers work across all of them."
 
@@ -63,11 +63,11 @@ git diff main --name-only | claude -p "review these changed files for security i
 
 ## Cómo empezar
 
-1. Si nunca lo usaste: instalá la CLI nativa y corré `claude` dentro de un proyecto; te pide login la primera vez.
-2. Si ya usás VS Code o un IDE JetBrains a diario, la extensión/plugin da diffs inline sin salir del editor.
-3. Para tareas largas que no querés monitorear (auditorías, migraciones grandes), usá la web (`claude.ai/code`) o `claude --cloud` desde la terminal.
+1. Si nunca lo usaste: instala la CLI nativa y ejecuta `claude` dentro de un proyecto; te pide login la primera vez.
+2. Si ya usas VS Code o un IDE JetBrains a diario, la extensión/plugin da diffs inline sin salir del editor.
+3. Para tareas largas que no quieres monitorear (auditorías, migraciones grandes), usa la web (`claude.ai/code`) o `claude --cloud` desde la terminal.
 4. `claude --teleport` trae de vuelta a tu terminal una sesión que arrancaste en la web o en el celular (requiere suscripción de claude.ai).
-5. Para automatizar en CI, usá `claude -p "prompt"` en modo no interactivo en vez de cualquiera de las superficies interactivas.
+5. Para automatizar en CI, usa `claude -p "prompt"` en modo no interactivo en vez de cualquiera de las superficies interactivas.
 
 ## Fuentes
 

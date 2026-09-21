@@ -1,11 +1,11 @@
 ---
 id: cc-uso-plan-mode
-title: "Plan mode y desarrollo dirigido por especificacion: cuando usar cada uno"
+title: "Plan mode y desarrollo dirigido por especificación: cuándo usar cada uno"
 track: claude-code
 type: guia
 level: intermedio
 tags: plan mode, especificaciones, flujo de trabajo, prompts
-summary: "Plan mode resuelve tareas de una sesion; el desarrollo dirigido por especificacion persiste el plan en disco. La regla practica que usan los desarrolladores: unos 4 archivos como umbral."
+summary: "Plan mode resuelve tareas de una sesión; el desarrollo dirigido por especificación persiste el plan en disco. La regla práctica que usan los desarrolladores: unos 4 archivos como umbral."
 updated: 2026-09-20
 reading_minutes: 5
 source_span: 2026-05-19..2026-05-19

@@ -1,18 +1,18 @@
 ---
 id: claude-code-memoria-claude-md
-title: "CLAUDE.md y memoria automatica: que contexto persiste entre sesiones"
+title: "CLAUDE.md y memoria automática: qué contexto persiste entre sesiones"
 track: claude-code
 type: guia
 level: intermedio
 tags: memoria, claude-md, agents-md, contexto, configuracion
-summary: "Como funcionan CLAUDE.md, AGENTS.md y la memoria automatica (auto memory) de Claude Code: jerarquia de archivos, que conviene escribir ahi y que no, con ejemplos oficiales."
+summary: "Cómo funcionan CLAUDE.md, AGENTS.md y la memoria automática (auto memory) de Claude Code: jerarquía de archivos, qué conviene escribir ahí y qué no, con ejemplos oficiales."
 updated: 2026-09-20
 reading_minutes: 8
 source_span: 2026-09-18..2026-09-19
 confidence: alta
 ---
 
-Cada sesión de Claude Code arranca con una ventana de contexto vacía. Dos mecanismos distintos le dan continuidad: `CLAUDE.md` (instrucciones que vos escribís) y la memoria automática o "auto memory" (notas que Claude escribe solo a partir de tus correcciones). Son complementarios, no alternativos, y la documentación oficial es explícita en que ninguno de los dos es una capa de aplicación forzada: Claude "trata ambos como contexto, no como configuración exigida". Para bloquear algo pase lo que pase hace falta un hook `PreToolUse`, no un CLAUDE.md.
+Cada sesión de Claude Code arranca con una ventana de contexto vacía. Dos mecanismos distintos le dan continuidad: `CLAUDE.md` (instrucciones que tú escribes) y la memoria automática o "auto memory" (notas que Claude escribe solo a partir de tus correcciones). Son complementarios, no alternativos, y la documentación oficial es explícita en que ninguno de los dos es una capa de aplicación forzada: Claude "trata ambos como contexto, no como configuración exigida". Para bloquear algo pase lo que pase hace falta un hook `PreToolUse`, no un CLAUDE.md.
 
 ## Por qué importa
 
@@ -66,11 +66,11 @@ No encontramos una controversia pública activa sobre CLAUDE.md vs. memoria auto
 
 ## Cómo empezar
 
-1. Corré `/init` para generar un CLAUDE.md inicial a partir del análisis del propio código (build commands, convenciones detectadas).
-2. Sumá algo a CLAUDE.md solo cuando Claude repite el mismo error dos veces, o cuando escribís la misma corrección en el chat que ya escribiste la sesión anterior.
+1. Ejecuta `/init` para generar un CLAUDE.md inicial a partir del análisis del propio código (build commands, convenciones detectadas).
+2. Suma algo a CLAUDE.md solo cuando Claude repite el mismo error dos veces, o cuando escribes la misma corrección en el chat que ya escribiste la sesión anterior.
 3. Si la instrucción es un procedimiento de varios pasos o solo aplica a una parte del repo, no va en CLAUDE.md: va en un skill o en una regla con `paths:` dentro de `.claude/rules/`.
-4. Verificá qué se cargó con `/context` (lista "Memory files"), y navegá o editá memoria con `/memory`.
-5. En monorepos, usá `claudeMdExcludes` para que no se carguen CLAUDE.md de otros equipos que no tocan tu trabajo.
+4. Verifica qué se cargó con `/context` (lista "Memory files"), y navega o edita memoria con `/memory`.
+5. En monorepos, usa `claudeMdExcludes` para que no se carguen CLAUDE.md de otros equipos que no tocan tu trabajo.
 
 ## Fuentes
 

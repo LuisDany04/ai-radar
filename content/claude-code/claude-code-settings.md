@@ -1,28 +1,28 @@
 ---
 id: claude-code-settings
-title: "Configuracion de Claude Code: settings.json, jerarquia y permisos"
+title: "Configuración de Claude Code: settings.json, jerarquía y permisos"
 track: claude-code
 type: guia
 level: intermedio
 tags: configuracion, settings, permisos, variables-de-entorno, modelo
-summary: "Como se organizan los settings.json de Claude Code (managed, linea de comandos, local, proyecto, usuario), como funcionan permisos allow/ask/deny y como fijar el modelo, con ejemplos oficiales copiables."
+summary: "Cómo se organizan los settings.json de Claude Code (managed, línea de comandos, local, proyecto, usuario), cómo funcionan permisos allow/ask/deny y cómo fijar el modelo, con ejemplos oficiales copiables."
 updated: 2026-09-20
 reading_minutes: 8
 source_span: 2026-07-15..2026-09-18
 confidence: alta
 ---
 
-Claude Code se configura con archivos JSON planos llamados `settings.json`. No hay un único archivo: hay hasta cinco fuentes que se combinan, y entender el orden en que se pisan entre si es la parte que más confunde a quien recién empieza.
+Claude Code se configura con archivos JSON planos llamados `settings.json`. No hay un único archivo: hay hasta cinco fuentes que se combinan, y entender el orden en que se pisan entre sí es la parte que más confunde a quien recién empieza.
 
 ## Por qué importa
 
-Un mismo comportamiento (por ejemplo, si Claude puede correr `curl` sin preguntar) puede estar definido en el archivo del usuario, en el del proyecto, en uno local sin versionar, o impuesto por la organización. Si no sabés cuál gana, terminás editando el archivo equivocado y el cambio "no se aplica" sin razón aparente. Además, algunas claves de permisos (`disableClaudeAiConnectors`, `isolatePeerMachines`, `maxEffortLevel`, entre otras) invierten la jerarquía a propósito: gana el valor más restrictivo venga de donde venga, como mecanismo de seguridad.
+Un mismo comportamiento (por ejemplo, si Claude puede correr `curl` sin preguntar) puede estar definido en el archivo del usuario, en el del proyecto, en uno local sin versionar, o impuesto por la organización. Si no sabes cuál gana, terminas editando el archivo equivocado y el cambio "no se aplica" sin razón aparente. Además, algunas claves de permisos (`disableClaudeAiConnectors`, `isolatePeerMachines`, `maxEffortLevel`, entre otras) invierten la jerarquía a propósito: gana el valor más restrictivo venga de donde venga, como mecanismo de seguridad.
 
 ## Ejemplo
 
 Jerarquía de mayor a menor precedencia, según la documentación oficial (`code.claude.com/docs/en/settings`, actualizada 2026-09-17):
 
-1. **Managed settings** — `managed-settings.json`, MDM o la consola de claude.ai. La define la organización; nada de lo que vos configures la sobreescribe.
+1. **Managed settings** — `managed-settings.json`, MDM o la consola de claude.ai. La define la organización; nada de lo que tú configures la sobreescribe.
 2. **Línea de comandos** — `claude --settings '{...}'`, solo para esa sesión.
 3. **Proyecto local** — `.claude/settings.local.json`. Tuyo, para ese proyecto; Claude Code lo agrega solo a `git excludes` la primera vez que escribe ahí (por ejemplo al aceptar "Yes, and don't ask again" en un prompt de permiso).
 4. **Proyecto compartido** — `.claude/settings.json`, versionado, para todo el equipo.
@@ -117,11 +117,11 @@ Para seleccionar modelo hay tres vías, cada una con su propia precedencia: la c
 
 ## Cómo empezar
 
-1. Corré `/status` dentro de una sesión para ver qué archivos de settings se cargaron (línea "Setting sources").
-2. Si algo no aplica, primero sospechá de un nivel más alto: proyecto pisa usuario, managed pisa todo.
-3. Para permisos personales que no querés versionar, escribí en `.claude/settings.local.json` en vez de `.claude/settings.json`.
-4. Usá `claude doctor` para ver qué entradas del archivo fueron rechazadas por JSON inválido o clave desconocida.
-5. Para autocompletado en el editor, agregá `"$schema": "https://json.schemastore.org/claude-code-settings.json"` al archivo.
+1. Ejecuta `/status` dentro de una sesión para ver qué archivos de settings se cargaron (línea "Setting sources").
+2. Si algo no aplica, primero sospecha de un nivel más alto: proyecto pisa usuario, managed pisa todo.
+3. Para permisos personales que no quieres versionar, escribe en `.claude/settings.local.json` en vez de `.claude/settings.json`.
+4. Usa `claude doctor` para ver qué entradas del archivo fueron rechazadas por JSON inválido o clave desconocida.
+5. Para autocompletado en el editor, agrega `"$schema": "https://json.schemastore.org/claude-code-settings.json"` al archivo.
 
 ## Fuentes
 

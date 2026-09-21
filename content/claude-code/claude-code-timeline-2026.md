@@ -1,11 +1,11 @@
 ---
 id: claude-code-timeline-2026
-title: "Linea de tiempo 2026: que se lanzo en Claude Code, mes a mes"
+title: "Línea de tiempo 2026: que se lanzó en Claude Code, mes a mes"
 track: claude-code
 type: release
 level: intermedio
 tags: release, changelog, historial, modelos
-summary: "De la v2.0.76 a la v2.1.278: worktrees, auto mode por defecto, tres generaciones de modelos (Opus 4.6 a 5, Sonnet 5, Fable 5.1) y la fusion de slash commands con skills, con fecha y version exactas de cada hito."
+summary: "De la v2.0.76 a la v2.1.278: worktrees, auto mode por defecto, tres generaciones de modelos (Opus 4.6 a 5, Sonnet 5, Fable 5.1) y la fusión de slash commands con skills, con fecha y versión exactas de cada hito."
 updated: 2026-09-20
 reading_minutes: 9
 source_span: 2026-05-06..2026-09-19
@@ -62,9 +62,9 @@ Datos que Anthropic publicó para justificar el cambio a auto mode por defecto (
 
 ## Cómo empezar
 
-1. Si no actualizás seguido, al menos revisá los releases marcados "Introducing Claude..." en el CHANGELOG — son los que cambian qué modelo corre por defecto y a qué precio.
-2. `claude --version` te dice dónde estás parado; compará contra la tabla de arriba para saber qué te estás perdiendo.
-3. Para no perderte el próximo cambio de default (modelo o modo), mirá `claude.com/blog` una vez por mes en vez de leer el changelog entero.
+1. Si no actualizas seguido, al menos revisa los releases marcados "Introducing Claude..." en el CHANGELOG — son los que cambian qué modelo corre por defecto y a qué precio.
+2. `claude --version` te dice dónde estás parado; compara contra la tabla de arriba para saber qué te estás perdiendo.
+3. Para no perderte el próximo cambio de default (modelo o modo), mira `claude.com/blog` una vez por mes en vez de leer el changelog entero.
 
 ## Fuentes
 

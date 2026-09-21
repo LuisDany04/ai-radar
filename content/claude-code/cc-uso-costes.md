@@ -1,11 +1,11 @@
 ---
 id: cc-uso-costes
-title: "A donde va el presupuesto en Claude Code: limites, subidas y como vigilarlo"
+title: "Adónde va el presupuesto en Claude Code: límites, subidas y cómo vigilarlo"
 track: claude-code
 type: dato
 level: intermedio
 tags: costes, limites de uso, monitorizacion, tokens
-summary: "Claude Code cobra por tokens de API bajo el capó incluso en plan de suscripcion. Cifras reales de coste por desarrollador, la subida de limites de mayo de 2026 y la polemica de enero."
+summary: "Claude Code cobra por tokens de API bajo el capó incluso en plan de suscripción. Cifras reales de coste por desarrollador, la subida de límites de mayo de 2026 y la polémica de enero."
 updated: 2026-09-20
 reading_minutes: 6
 source_span: 2026-01-05..2026-05-06

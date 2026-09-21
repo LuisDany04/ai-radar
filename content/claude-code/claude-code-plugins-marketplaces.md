@@ -1,11 +1,11 @@
 ---
 id: claude-code-plugins-marketplaces
-title: "Plugins y marketplaces: como se empaqueta y distribuye una extension de Claude Code"
+title: "Plugins y marketplaces: cómo se empaqueta y distribuye una extensión de Claude Code"
 track: claude-code
 type: guia
 level: intermedio
 tags: plugins, marketplace, distribucion, mcp
-summary: "Un plugin empaqueta skills, subagentes, hooks y servidores MCP en una sola unidad instalable. Hay un marketplace oficial curado (310 plugins) y uno comunitario mucho mas grande (2282), mas los que arma cada organizacion."
+summary: "Un plugin empaqueta skills, subagentes, hooks y servidores MCP en una sola unidad instalable. Hay un marketplace oficial curado (310 plugins) y uno comunitario mucho más grande (2282), más los que arma cada organización."
 updated: 2026-09-20
 reading_minutes: 8
 source_span: 2026-09-16..2026-09-20
@@ -47,7 +47,7 @@ Para probarlo localmente sin publicarlo en ningún marketplace:
 claude --plugin-dir ./my-first-plugin
 ```
 
-Para instalar algo real desde el marketplace oficial (que se registra solo la primera vez que arrancás Claude Code de forma interactiva):
+Para instalar algo real desde el marketplace oficial (que se registra solo la primera vez que arrancas Claude Code de forma interactiva):
 
 ```bash
 /plugin install github@claude-plugins-official
@@ -81,14 +81,14 @@ Los marketplaces también se declaran en `.claude/settings.json` para que todo e
 | Estrellas en GitHub de `anthropics/claude-plugins-community` | 4.276 | GitHub API, 2026-09-20 |
 | Categorías del marketplace oficial | code intelligence (LSP), integraciones externas (GitHub, Jira/Confluence, Figma, Slack, Sentry, etc.), revisión de seguridad automática, workflows de desarrollo, estilos de salida | code.claude.com/docs/en/discover-plugins, 2026-09-18 |
 
-> [!duda] No encontramos una cifra oficial de "instalaciones" por plugin publicada por Anthropic; el conteo de 310 y 2.282 es nuestro, contando entradas del array `plugins` en cada `marketplace.json` al 2026-09-20, así que crece semana a semana y puede no coincidir con lo que veas si lo repetís más adelante.
+> [!duda] No encontramos una cifra oficial de "instalaciones" por plugin publicada por Anthropic; el conteo de 310 y 2.282 es nuestro, contando entradas del array `plugins` en cada `marketplace.json` al 2026-09-20, así que crece semana a semana y puede no coincidir con lo que veas si lo repites más adelante.
 
 ## Cómo empezar
 
 1. Para uso personal rápido, no hace falta plugin: alcanza con `.claude/skills/`, `.claude/agents/` o un hook en `settings.json`.
-2. Convertí a plugin recién cuando quieras compartirlo: copiá `commands/`, `agents/`, `skills/` a la carpeta del plugin y armá `hooks/hooks.json` a partir del bloque `hooks` de tu `settings.json`.
-3. Antes de instalar cualquier plugin de terceros, revisá qué agrega: el panel de detalles de `/plugin` muestra costo de contexto, última actualización y qué componentes instala (comandos, agentes, skills, hooks, servidores MCP/LSP).
-4. Para plugins de intelligence de código (LSP), instalá primero el binario del language server (por ejemplo `rust-analyzer` o `pyright-langserver`) — el plugin no lo instala por vos.
+2. Convierte a plugin recién cuando quieras compartirlo: copia `commands/`, `agents/`, `skills/` a la carpeta del plugin y arma `hooks/hooks.json` a partir del bloque `hooks` de tu `settings.json`.
+3. Antes de instalar cualquier plugin de terceros, revisa qué agrega: el panel de detalles de `/plugin` muestra costo de contexto, última actualización y qué componentes instala (comandos, agentes, skills, hooks, servidores MCP/LSP).
+4. Para plugins de intelligence de código (LSP), instala primero el binario del language server (por ejemplo `rust-analyzer` o `pyright-langserver`) — el plugin no lo instala por ti.
 5. `claude plugin validate ./tu-plugin` corre localmente el mismo chequeo que usa el pipeline de revisión antes de aceptar un plugin en el marketplace comunitario.
 
 ## Fuentes

@@ -25,7 +25,7 @@ Elegir herramienta agéntica ya no es solo comparar features: en 2026 también h
 | Claude Code | Anthropic | CLI (+ ext. VS Code/JetBrains) | Incluido en Pro $17–20/mes, Max desde $100/mes, Team $20–25/asiento, Enterprise $20/asiento + tarifas de API | No — repo público pero licencia "todos los derechos reservados" | Vivo, muy activo |
 | OpenAI Codex (CLI) | OpenAI | CLI (+ ext. IDE, nube) | Incluido en ChatGPT ($0–$200/mes) o pago por token vía API | Sí — Apache-2.0 | Vivo, activo |
 | GitHub Copilot | GitHub (Microsoft) | IDE + CLI + agente en la nube | Free / Pro $10 / Pro+ $39 / Max $100 por usuario; Business $19 y Enterprise $39 por asiento + créditos de IA desde el 1-jun-2026 | No | Vivo, activo |
-| Cursor | Anysphere | IDE (fork de VS Code) | Hobby gratis; Pro $20 / Pro+ $60 / Ultra $200; Teams $40/asiento | No | Vivo, activo — compró Continue.dev en jun-2026 |
+| Cursor | Anysphere (subsidiaria de SpaceX desde el 2026-08-14) | IDE (fork de VS Code) | Hobby gratis; Pro $20 / Pro+ $60 / Ultra $200; Teams $40/asiento (sin cambios tras la compra) | No | Vivo, activo — compró Continue.dev en jun-2026; luego fue comprada ella misma por SpaceX por $60,000M en ago-2026 |
 | Windsurf | Cognition (ex Codeium) | IDE (fork de VS Code) + nube | Igual que Devin (ver fila siguiente) | No | **Muerto como marca**: rebrandeado a "Devin Desktop" el 2026-06-02 |
 | Cline | Cline Bot Inc. | Extensión IDE (VS Code/JetBrains) + CLI/SDK | Gratis, open-core, BYOK | Sí — Apache-2.0 | Vivo, activo — absorbió usuarios de Roo Code |
 | Roo Code | RooCodeInc | Extensión IDE (VS Code) | N/D | Sí — Apache-2.0, pero repo archivado | **Muerto**: discontinuado y archivado el 2026-05-15; equipo pivotó a Roomote (agente por Slack) |
@@ -96,4 +96,6 @@ Las estrellas de GitHub son una señal ruidosa, no una prueba de adopción real.
 - [Jules — Changelog](https://jules.google/docs/changelog/) — Google — pub: 2026-03-09 — visto: 2026-09-21
 - [Google Jules Pricing 2026](https://agentcode.ai/google-jules-pricing) — Agentcode — pub: s/f — visto: 2026-09-21
 - [Kilo-Org/kilocode](https://github.com/Kilo-Org/kilocode) — GitHub / Kilo Code — pub: 2026-09-21 — visto: 2026-09-21
+- [Three Days After Closing, Cursor Shipped Code Hosting](https://www.digitalapplied.com/blog/spacex-anysphere-close-first-product-move) — Digital Applied — pub: s/f — visto: 2026-09-21
+- [Cursor — Past, Present, and Future (Series D)](https://cursor.com/blog/series-d) — Cursor / Anysphere — pub: 2025-11-13 — visto: 2026-09-21
 - [Six Million (Suspected) Fake Stars on GitHub](https://arxiv.org/html/2412.13459v2) — arXiv (CMU / NC State / Socket) — pub: s/f — visto: 2026-09-21

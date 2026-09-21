@@ -64,14 +64,19 @@ awk -v now="$NOW" -v outjson="$OUT_JSON" '
     count = 0; errors = 0; warnings = 0; orto = 0; totsrc = 0
   }
 
-  FNR == 1 {
-    if (NR > 1) finish()
+  # BEGINFILE/ENDFILE en lugar de cerrar el archivo anterior desde FNR==1:
+  # así FILENAME siempre apunta al archivo que se está informando. Hacerlo de
+  # la otra forma atribuía cada aviso al archivo siguiente.
+  BEGINFILE {
     delete fm
     n = split(FILENAME, seg, "/")
     base = seg[n]; sub(/\.md$/, "", base)
     dir = seg[n - 1]
-    inside = 0; done_fm = 0; has_src_head = 0; nsrc = 0; has_seen = 0; accwords = ""
+    inside = 0; done_fm = 0; has_src_head = 0; nsrc = 0; has_seen = 0; accwords = ""; infence = 0
     count++
+  }
+
+  FNR == 1 {
     if ($0 !~ /^---[[:space:]]*$/) err("no empieza con --- (falta frontmatter)")
     else inside = 1
     next
@@ -93,7 +98,13 @@ awk -v now="$NOW" -v outjson="$OUT_JSON" '
     if ($0 ~ /^##[[:space:]]+Fuentes[[:space:]]*$/) has_src_head = 1
     if ($0 ~ /^-[[:space:]]*\[.*\]\(http/) nsrc++
     if ($0 ~ /visto:[[:space:]]*[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/) has_seen = 1
+
+    # El aviso ortográfico ignora los bloques de código: ahí el texto es código,
+    # y un identificador como "codigo_fuente" no es una falta de ortografía.
+    if ($0 ~ /^[[:space:]]*```/) { infence = !infence; next }
+    if (infence) next
     line = tolower($0)
+    gsub(/`[^`]*`/, "", line)
     while (match(line, "(^|[^a-záéíóúñ])(" ACC ")([^a-záéíóúñ]|$)")) {
       w = substr(line, RSTART, RLENGTH)
       gsub(/[^a-z]/, "", w)
@@ -132,8 +143,9 @@ awk -v now="$NOW" -v outjson="$OUT_JSON" '
       esc(fm["source_span"]), esc(fm["confidence"]), nsrc, esc(FILENAME) >> outjson
   }
 
+  ENDFILE { finish() }
+
   END {
-    finish()
     printf "\n" >> outjson
     close(outjson)
     print "    " count " fichas, " errors " errores, " warnings " avisos" > "/dev/stderr"

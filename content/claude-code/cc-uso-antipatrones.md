@@ -5,7 +5,7 @@ track: claude-code
 type: opinion
 level: intermedio
 tags: antipatrones, quejas, calidad, hacker news
-summary: "Sesion cajon de sastre, correcciones en bucle, CLAUDE.md sobrecargado. Anthropic los documenta como errores comunes; usuarios en Hacker News en 2026 los viven como quejas concretas."
+summary: "Sesión cajón de sastre, correcciones en bucle, CLAUDE.md sobrecargado. Anthropic los documenta como errores comunes; usuarios en Hacker News en 2026 los viven como quejas concretas."
 updated: 2026-09-20
 reading_minutes: 6
 source_span: 2026-04-23..2026-04-28
