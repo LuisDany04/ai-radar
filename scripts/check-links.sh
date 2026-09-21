@@ -30,29 +30,49 @@ if [ "$TOTAL" -eq 0 ]; then
 fi
 
 # Una sola comprobación, pensada para ejecutarse en paralelo vía xargs.
+# Cada trabajador escribe en SU PROPIO archivo, numerado. Con ocho procesos
+# haciendo append al mismo archivo se perdían resultados, y un resultado perdido
+# es un enlace que nadie comprobó aunque el informe diga "0 rotas".
+mkdir -p "$TMP/out"
 cat > "$TMP/one.sh" <<'ONE'
 #!/usr/bin/env bash
-url="$1"; ua="$2"; to="$3"; out="$4"
-code=$(curl -s -o /dev/null -L --max-time "$to" --retry 1 \
-         -A "$ua" -H 'Accept-Language: en,es;q=0.8' \
+# Recibe el número de línea y la URL; el resto llega por entorno.
+n="$1"; url="$2"
+code=$(curl -s -o /dev/null -L --max-time "$LC_TO" --retry 1 \
+         -A "$LC_UA" -H 'Accept-Language: en,es;q=0.8' \
          -w '%{http_code}' "$url" 2>/dev/null)
 # Algunos sitios rechazan HEAD o bots: si falla, reintenta pidiendo solo el primer byte.
 if [ -z "$code" ] || [ "$code" = "000" ] || [ "$code" = "403" ] || [ "$code" = "405" ]; then
-  code2=$(curl -s -o /dev/null -L --max-time "$to" -r 0-2048 \
-            -A "$ua" -H 'Accept: text/html,*/*' \
+  code2=$(curl -s -o /dev/null -L --max-time "$LC_TO" -r 0-2048 \
+            -A "$LC_UA" -H 'Accept: text/html,*/*' \
             -w '%{http_code}' "$url" 2>/dev/null)
   [ -n "$code2" ] && [ "$code2" != "000" ] && code="$code2"
 fi
-printf '%s\t%s\n' "${code:-000}" "$url" >> "$out"
+printf '%s\t%s\n' "${code:-000}" "$url" > "$LC_DIR/$n"
 ONE
 chmod +x "$TMP/one.sh"
 
-echo "==> Comprobando (${PAR} en paralelo, timeout ${TIMEOUT}s)"
-: > "$TMP/results.tsv"
-tr -d '\r' < "$TMP/urls.txt" \
-  | xargs -P "$PAR" -I{} "$TMP/one.sh" "{}" "$UA" "$TIMEOUT" "$TMP/results.tsv"
+export LC_UA="$UA" LC_TO="$TIMEOUT" LC_DIR="$TMP/out"
 
+echo "==> Comprobando (${PAR} en paralelo, timeout ${TIMEOUT}s)"
+tr -d '\r' < "$TMP/urls.txt" | awk '{printf "%06d %s\n", NR, $0}' \
+  | xargs -P "$PAR" -L1 "$TMP/one.sh" || true
+
+# Respaldo secuencial: cualquier URL cuyo archivo quedara vacío se reintenta a solas.
+i=0
+while IFS= read -r u; do
+  i=$((i + 1))
+  nn="$(printf '%06d' "$i")"
+  [ -s "$TMP/out/$nn" ] || "$TMP/one.sh" "$nn" "$u"
+done < <(tr -d '\r' < "$TMP/urls.txt")
+
+cat "$TMP/out"/* > "$TMP/results.tsv" 2>/dev/null
 sort -k1,1 "$TMP/results.tsv" > "$TMP/sorted.tsv"
+
+CHECKED="$(wc -l < "$TMP/sorted.tsv" | tr -d ' ')"
+if [ "$CHECKED" -ne "$TOTAL" ]; then
+  echo "  AVISO: se comprobaron $CHECKED de $TOTAL URLs. El informe está incompleto."
+fi
 
 ok=$(awk -F'\t' '$1 ~ /^2/' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
 redir=$(awk -F'\t' '$1 ~ /^3/' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
@@ -60,6 +80,10 @@ notfound=$(awk -F'\t' '$1 == "404" || $1 == "410"' "$TMP/sorted.tsv" | wc -l | t
 forbidden=$(awk -F'\t' '$1 == "401" || $1 == "403" || $1 == "429"' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
 servererr=$(awk -F'\t' '$1 ~ /^5/' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
 unreach=$(awk -F'\t' '$1 == "000"' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
+# Cajón para todo lo que no encaja arriba (402, 406, 451...). Sin él, esas URLs
+# desaparecían del recuento y el informe no cuadraba con el total.
+otros=$(awk -F'\t' '$1 !~ /^[235]/ && $1 != "000" && $1 != "404" && $1 != "410" && $1 != "401" && $1 != "403" && $1 != "429"' "$TMP/sorted.tsv" | wc -l | tr -d ' ')
+suma=$((ok + redir + notfound + forbidden + servererr + unreach + otros))
 
 # --- Informe ---------------------------------------------------------------
 mkdir -p docs
@@ -77,8 +101,23 @@ mkdir -p docs
   echo "| Bloquean al verificador (401/403/429) | $forbidden |"
   echo "| Error del servidor (5xx) | $servererr |"
   echo "| Sin respuesta (timeout/DNS) | $unreach |"
-  echo "| **Total** | **$TOTAL** |"
+  echo "| Otro código (402, 406, 451...) | $otros |"
+  echo "| **Total comprobado** | **$suma** de $TOTAL |"
   echo ""
+  if [ "$suma" -ne "$TOTAL" ]; then
+    echo "> No cuadra: $((TOTAL - suma)) URLs sin resultado. El informe está incompleto."
+    echo ""
+  fi
+
+  if [ "$otros" -gt 0 ]; then
+    echo "## Otros códigos"
+    echo ""
+    echo "Respuestas que no son ni éxito ni error claro. Suelen ser muros de pago o"
+    echo "bloqueos de plataforma, no enlaces rotos, pero conviene abrirlas a mano."
+    echo ""
+    awk -F'\t' '$1 !~ /^[235]/ && $1 != "000" && $1 != "404" && $1 != "410" && $1 != "401" && $1 != "403" && $1 != "429" {print "- `" $1 "` " $2}' "$TMP/sorted.tsv"
+    echo ""
+  fi
 
   if [ "$notfound" -gt 0 ]; then
     echo "## Rotas — hay que corregirlas"
@@ -116,7 +155,8 @@ echo "==> Resultado ($TODAY)"
 printf '    responden       %s\n' "$ok"
 printf '    redirigen       %s\n' "$redir"
 printf '    ROTAS           %s\n' "$notfound"
-printf '    no concluyentes %s\n' "$((forbidden + unreach + servererr))"
+printf '    no concluyentes %s\n' "$((forbidden + unreach + servererr + otros))"
+[ "$suma" -ne "$TOTAL" ] && printf '    SIN RESULTADO   %s\n' "$((TOTAL - suma))"
 echo "    informe: docs/link-check.md"
 
 if [ "$notfound" -gt 0 ]; then

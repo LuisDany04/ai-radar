@@ -24,7 +24,7 @@ Un caso concreto: el 26 de mayo de 2025, Invariant Labs publicó una vulnerabili
 
 OWASP mantiene "Prompt Injection" como LLM01, el riesgo número uno de su Top 10 para aplicaciones LLM, desde la edición de 2023 y sin moverse en 2024 ni en 2025. En diciembre de 2025, el OWASP GenAI Security Project publicó un Top 10 separado para aplicaciones agénticas, con "Agent Goal Hijacking" (manipular los objetivos del agente vía inputs envenenados) como riesgo principal — la misma familia de problema, ahora con foco en agentes que actúan, no solo responden.
 
-> [!duda] No hay consenso sobre si el problema tiene arreglo definitivo. Un paper de Sahar Abdelnabi y Eugene Bagdasarian ("AI Agents May Always Fall for Prompt Injections", arXiv, 17 de mayo de 2026) presenta un resultado formal: reencuadrando el problema con la teoría de integridad contextual, argumentan que un atacante siempre puede construir un contexto donde un flujo de información bloqueado parezca legítimo, o que un defensor que endurece las reglas termine bloqueando también comportamientos legítimos del agente. Es decir, proponen que no es un problema de ingeniería pendiente sino una limitación estructural. Esto no es today un consenso de toda la comunidad, pero coincide con lo que Willison viene diciendo desde 2022 ("no sé cómo resolver la inyección de prompts") y con lo que en junio de 2026 declaró Ariel Fogel, investigador de seguridad de IA en Pillar Security, en la conferencia Infosecurity Europe: que la inyección de prompts "sigue siendo un problema arquitectónico sin resolver" a nivel fundamental.
+> [!duda] No hay consenso sobre si el problema tiene arreglo definitivo. Un paper de Sahar Abdelnabi y Eugene Bagdasarian ("AI Agents May Always Fall for Prompt Injections", arXiv, 17 de mayo de 2026) presenta un resultado formal: reencuadrando el problema con la teoría de integridad contextual, argumentan que un atacante siempre puede construir un contexto donde un flujo de información bloqueado parezca legítimo, o que un defensor que endurece las reglas termine bloqueando también comportamientos legítimos del agente. Es decir, proponen que no es un problema de ingeniería pendiente sino una limitación estructural. Esto no es hoy un consenso de toda la comunidad, pero coincide con lo que Willison viene diciendo desde 2022 ("no sé cómo resolver la inyección de prompts") y con lo que en junio de 2026 declaró Ariel Fogel, investigador de seguridad de IA en Pillar Security, en la conferencia Infosecurity Europe: que la inyección de prompts "sigue siendo un problema arquitectónico sin resolver" a nivel fundamental.
 
 ## Ejemplo
 
@@ -49,9 +49,9 @@ Patrón de mitigación recomendado por OWASP para LLM01 (defensa en profundidad,
 
 ## Cómo empezar
 
-1. Antes de conectar un agente a una fuente de contenido no confiable (issues, emails, páginas web, resultados de búsqueda), pregúntate si ese mismo agente también tiene datos privados y capacidad de comunicarse hacia afuera. Si las tres cosas coinciden, tenés la trifecta letal.
-2. Si no podés eliminar una de las tres patas, reducila: tokens de mínimo privilegio y de un solo recurso por sesión (como recomienda Invariant Labs para el caso de GitHub MCP), en vez de credenciales que cubran todo.
-3. Exigí aprobación humana explícita antes de que el agente ejecute la acción de "comunicar hacia afuera" (enviar, publicar, hacer push, llamar una API externa) cuando el contexto previo incluyó contenido no confiable.
+1. Antes de conectar un agente a una fuente de contenido no confiable (issues, emails, páginas web, resultados de búsqueda), pregúntate si ese mismo agente también tiene datos privados y capacidad de comunicarse hacia afuera. Si las tres cosas coinciden, tienes la trifecta letal.
+2. Si no puedes eliminar una de las tres patas, redúcela: tokens de mínimo privilegio y de un solo recurso por sesión (como recomienda Invariant Labs para el caso de GitHub MCP), en vez de credenciales que cubran todo.
+3. Exige aprobación humana explícita antes de que el agente ejecute la acción de "comunicar hacia afuera" (enviar, publicar, hacer push, llamar una API externa) cuando el contexto previo incluyó contenido no confiable.
 4. Sigue el tag "prompt-injection" del blog de Simon Willison y los avisos LLM01 de OWASP: es un campo que cambia con cada nuevo tipo de agente que sale al mercado.
 
 ## Fuentes

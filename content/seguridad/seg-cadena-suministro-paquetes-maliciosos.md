@@ -28,7 +28,7 @@ Dejar que un agente de código instale paquetes por su cuenta suma un eslabón n
 
 ## Ejemplo
 
-Antes de dejar que un agente ejecute `npm install`, `pip install` o similar de forma autónoma, verificá el paquete contra el registro real en lugar de confiar en el nombre que propuso el modelo:
+Antes de dejar que un agente ejecute `npm install`, `pip install` o similar de forma autónoma, verifica el paquete contra el registro real en lugar de confiar en el nombre que propuso el modelo:
 
 ```bash
 # En vez de dejar que el agente instale directamente lo que sugirió,
@@ -39,7 +39,7 @@ npm view <paquete-sugerido> name version time.created maintainers --json
 pip index versions <paquete-sugerido>
 ```
 
-Si el paquete tiene pocas semanas de antigüedad, un solo mantenedor y un nombre casi idéntico a uno popular (por ejemplo `unused-imports` en vez de `eslint-plugin-unused-imports`), tratalo como sospechoso hasta confirmar lo contrario.
+Si el paquete tiene pocas semanas de antigüedad, un solo mantenedor y un nombre casi idéntico a uno popular (por ejemplo `unused-imports` en vez de `eslint-plugin-unused-imports`), trátalo como sospechoso hasta confirmar lo contrario.
 
 ## Datos
 
@@ -61,9 +61,9 @@ Si el paquete tiene pocas semanas de antigüedad, un solo mantenedor y un nombre
 ## Cómo empezar
 
 1. No le des a un agente flags que saltean confirmaciones de instalación (`--yolo`, `--dangerously-skip-permissions`, `--trust-all-tools`) en una máquina con tokens de npm/GitHub/cloud activos; el caso s1ngularity mostró que esas mismas CLIs se pueden usar en tu contra.
-2. Antes de instalar un paquete que sugirió un agente, confirmá que existe, su antigüedad y su mantenedor con el registro real (ver ejemplo arriba), especialmente si el nombre se parece a uno de un paquete popular.
-3. Auditá extensiones de IDE con permisos amplios (lectura de archivos, red saliente) aunque tengan muchas instalaciones: los casos de enero de 2026 tenían más de un millón de instalaciones combinadas y seguían activas al momento de ser reportadas.
-4. Si tu proyecto publica paquetes automáticamente (CI/CD), no le des a un bot de triage o de soporte basado en IA acceso al mismo pipeline que tiene los tokens de publicación; separá esos workflows y rotá los tokens con regularidad, como recomienda el análisis de Snyk sobre el caso Cline.
+2. Antes de instalar un paquete que sugirió un agente, confirma que existe, su antigüedad y su mantenedor con el registro real (ver ejemplo arriba), especialmente si el nombre se parece a uno de un paquete popular.
+3. Audita extensiones de IDE con permisos amplios (lectura de archivos, red saliente) aunque tengan muchas instalaciones: los casos de enero de 2026 tenían más de un millón de instalaciones combinadas y seguían activas al momento de ser reportadas.
+4. Si tu proyecto publica paquetes automáticamente (CI/CD), no le des a un bot de triage o de soporte basado en IA acceso al mismo pipeline que tiene los tokens de publicación; separa esos workflows y rota los tokens con regularidad, como recomienda el análisis de Snyk sobre el caso Cline.
 
 ## Fuentes
 

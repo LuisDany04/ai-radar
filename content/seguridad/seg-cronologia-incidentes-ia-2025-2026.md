@@ -34,7 +34,7 @@ No son casos hipotéticos ni demostraciones de laboratorio: son vulnerabilidades
 
 ## Cómo empezar
 
-1. Si usás alguna de las herramientas mencionadas (GitHub Copilot, Amazon Q, servidores MCP de terceros, Cline, Claude Code con acceso a fuentes externas), revisa los avisos oficiales enlazados abajo para confirmar que corrés una versión posterior al fix.
+1. Si usas alguna de las herramientas mencionadas (GitHub Copilot, Amazon Q, servidores MCP de terceros, Cline, Claude Code con acceso a fuentes externas), revisa los avisos oficiales enlazados abajo para confirmar que corres una versión posterior al fix.
 2. Nota el patrón común: en 5 de los 7 casos, la puerta de entrada fue contenido que el agente procesó sin saber que no era confiable (un issue, un comentario de PR, un email, un título de issue). Trata cualquier input externo al agente como si pudiera contener instrucciones.
 3. Para pipelines de CI/CD que publican paquetes (como en el caso Nx y Cline), rota tokens de publicación regularmente y evita que un solo token cubra build, test y publish.
 

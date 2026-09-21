@@ -60,7 +60,7 @@ Para un agente que trabaja de forma más autónoma (varios commits, PRs propias)
 
 ## Cómo auditar
 
-Auditar significa poder responder, después del hecho, "¿qué corrió, quién lo pidió y qué tocó". Hay dos niveles según lo que tu plan permite pagar:
+Auditar significa poder responder, después del hecho, "¿qué corrió, quién lo pidió y qué tocó?". Hay dos niveles según lo que tu plan permite pagar:
 
 **Sin plan de pago (mínimo viable).** Claude Code expone telemetría vía OpenTelemetry en cualquier plan, incluyendo eventos como `claude_code.tool_result` (qué herramienta corrió, si tuvo éxito) y `claude_code.tool_decision` (si el permiso se otorgó o se denegó), y métricas como `claude_code.commit.count` y `claude_code.pull_request.count`. Apuntar ese exporter a un colector propio, aunque sea gratuito, ya da un registro mínimo sin depender de Enterprise.
 
