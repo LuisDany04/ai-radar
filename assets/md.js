@@ -90,7 +90,7 @@
      Formato esperado:
      - [Título](url) — Publicador — pub: 2026-08-14 — visto: 2026-09-20 */
   function renderSourceItem(raw) {
-    var parts = raw.split(/\s+—\s+|\s+--\s+/);
+    var parts = raw.split(/\s+[—–]\s+|\s+--\s+/);
     var head = parts.shift() || '';
     var meta = [];
     parts.forEach(function (p) {
