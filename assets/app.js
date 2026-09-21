@@ -68,9 +68,11 @@
       if (!inside) continue;
       var m = SRC_RE.exec(l.trim());
       if (!m) continue;
-      var rest = m[3] || '';
-      var parts = rest.split(/\s+—\s+|\s+--\s+/).filter(Boolean);
-      var src = { title: m[1], url: m[2], publisher: '', pub: '', seen: '' };
+      // El primer separador queda pegado al enlace, así que hay que quitarlo
+      // antes de partir; si no, el publicador se lee como "— Anthropic".
+      var rest = (m[3] || '').replace(/^\s*[—–-]+\s*/, '');
+      var parts = rest.split(/\s+[—–]\s+|\s+--\s+/).filter(Boolean);
+      var src = { title: m[1], url: m[2], publisher: '', pub: '', seen: '', note: '' };
       parts.forEach(function (p) {
         var mm = /^(pub|publicado)\s*:\s*(.+)$/i.exec(p.trim());
         var ms = /^(visto|consultado)\s*:\s*(.+)$/i.exec(p.trim());
@@ -78,6 +80,17 @@
         else if (ms) src.seen = ms[2].trim();
         else if (!src.publisher) src.publisher = p.trim();
       });
+      // Varias fichas escriben "s/f (listado consultado el …)". La columna de
+      // fecha se queda solo con la fecha, o con s/f, y la coletilla pasa a nota.
+      var dm = /(\d{4}-\d{2}-\d{2})/.exec(src.pub);
+      if (dm) {
+        if (src.pub !== dm[1]) src.note = src.pub.replace(dm[1], '').replace(/^[\s(]+|[\s)]+$/g, '');
+        src.pub = dm[1];
+      } else if (src.pub) {
+        var bare = src.pub.replace(/^s\/f\s*/i, '').replace(/^[\s(]+|[\s)]+$/g, '');
+        if (bare) src.note = bare;
+        src.pub = '';
+      }
       try { src.domain = new URL(src.url).hostname.replace(/^www\./, ''); }
       catch (e) { src.domain = ''; }
       out.push(src);
@@ -581,7 +594,10 @@
         html += '<tr>' +
           '<td class="date">' + esc(r.s.pub || 's/f') + '</td>' +
           '<td><a href="' + esc(r.s.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.s.title) + '</a>' +
-            (r.s.publisher ? '<div style="font-size:11px;color:var(--text-faint)">' + esc(r.s.publisher) + '</div>' : '') +
+            (r.s.publisher || r.s.note
+              ? '<div style="font-size:11px;color:var(--text-faint)">' + esc(r.s.publisher) +
+                (r.s.note ? (r.s.publisher ? ' · ' : '') + esc(r.s.note) : '') + '</div>'
+              : '') +
           '</td>' +
           '<td class="pubr">' + esc(r.s.domain || '') + '</td>' +
           '<td><a href="#/d/' + esc(r.d.id) + '">' + esc(r.d.title) + '</a></td>' +
