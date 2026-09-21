@@ -1,25 +1,27 @@
 # Verificación de enlaces
 
 Comprobación automática de todas las URLs citadas en las fichas.
-Última ejecución: **2026-09-21T22:23:38Z**
+Última ejecución: **2026-09-21T22:25:44Z**
 
 | Resultado | URLs |
 |---|---:|
-| Responden (2xx) | 377 |
+| Responden (2xx) | 378 |
 | Redirigen (3xx sin seguir) | 2 |
 | No encontradas (404/410) | 0 |
-| Bloquean al verificador (401/403/429) | 1 |
+| Bloquean al verificador (401/403/429) | 0 |
 | Error del servidor (5xx) | 0 |
 | Sin respuesta (timeout/DNS) | 0 |
-| **Total** | **383** |
+| Otro código (402, 406, 451...) | 3 |
+| **Total comprobado** | **383** de 383 |
 
-## No concluyentes
+## Otros códigos
 
-Estas URLs no se pudieron confirmar de forma automática. Suele deberse a
-protección anti-bots o a un límite de peticiones, no a que el enlace esté roto.
-Conviene abrirlas a mano antes de darlas por malas.
+Respuestas que no son ni éxito ni error claro. Suelen ser muros de pago o
+bloqueos de plataforma, no enlaces rotos, pero conviene abrirlas a mano.
 
-- `429` https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/cli/commands.md
+- `400` https://ai.meta.com/blog/
+- `400` https://ai.meta.com/blog/introducing-muse-spark-msl/
+- `400` https://ai.meta.com/blog/llama-4-multimodal-intelligence/
 
 ## Sitios más citados
 

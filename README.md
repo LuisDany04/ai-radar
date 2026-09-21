@@ -115,11 +115,28 @@ docs/
 
 ---
 
+## Qué cubre
+
+| Tema | Fichas | Caduca en | Qué encontrarás |
+|---|---:|---|---|
+| Claude Code | 16 | ~2 meses | Superficies, configuración, hooks, subagentes, skills, plugins, y ocho fichas de uso real: bucle de trabajo, contexto, costes, antipatrones |
+| Agent Skills | 8 | ~2 meses | Anatomía de SKILL.md, ranking medido de las más usadas, cómo escribir una buena, seguridad de las de terceros |
+| MCP | 8 | ~2 meses | Estado de la especificación, adopción, registry, servidores más usados, CVEs reales, el debate sobre alternativas |
+| Modelos | 8 | ~1 mes | Mapa comparativo con precios verificados, benchmarks y por qué engañan, coste real de agentes, contexto largo |
+| Herramientas | 8 | ~1 mes | El mercado comparado sin marketing, quién murió o fue adquirido, precios y trampas de facturación |
+| Prácticas | 16 | ~3 meses | Context engineering, evals, TDD, spec-driven, revisión, multi-agente, y siete fichas de debate con las dos posturas |
+| Tendencias | 8 | ~6 meses | Encuestas, DORA, adopción real, evidencia de productividad a favor y en contra, negocio del sector |
+| Seguridad | 8 | ~3 meses | Inyección de prompts, incidentes fechados, cadena de suministro, permisos, secretos, gobernanza |
+
+Las fichas de **modelos** y **herramientas** son las que envejecen más rápido: precios y
+productos cambian cada pocas semanas. La fecha de cada fuente está siempre visible para que
+puedas juzgar si sigue vigente.
+
+---
+
 ## Limitaciones
 
-Esto es una foto fija. El ecosistema cambia cada semana y las fichas de **modelos,
-precios y herramientas** envejecerán rápido; por eso la fecha de cada fuente está
-siempre visible.
+Esto es una foto fija de septiembre de 2026, no un feed que se actualiza solo.
 
 Los resúmenes son interpretaciones. Cuando algo importe de verdad, abre la fuente
 original: para eso está enlazada.
