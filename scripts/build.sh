@@ -105,7 +105,11 @@ awk -v now="$NOW" -v outjson="$OUT_JSON" '
     if (infence) next
     line = tolower($0)
     gsub(/`[^`]*`/, "", line)
-    while (match(line, "(^|[^a-záéíóúñ])(" ACC ")([^a-záéíóúñ]|$)")) {
+    gsub(/https?:\/\/[^ )]*/, "", line)
+    # Los límites excluyen guion y barra: así "datos-adopcion-ia" o una ruta de
+    # URL no se leen como la palabra suelta "adopcion". Son identificadores,
+    # y el esquema pide que vayan sin tildes.
+    while (match(line, "(^|[^a-záéíóúñ/-])(" ACC ")([^a-záéíóúñ/-]|$)")) {
       w = substr(line, RSTART, RLENGTH)
       gsub(/[^a-z]/, "", w)
       if (index(accwords, " " w " ") == 0) accwords = accwords " " w " "

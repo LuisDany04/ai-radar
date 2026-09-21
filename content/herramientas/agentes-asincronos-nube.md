@@ -42,14 +42,14 @@ Estadísticas oficiales publicadas por GitHub sobre su propio Copilot code revie
 
 ## Debate
 
-**La lectura optimista:** los tres reseñadores independientes citados coinciden en que estos agentes rinden bien quantified — con tickets claros, criterios de aceptación explícitos y alcance acotado — y que el mecanismo de revisión vía pull request es, en sí mismo, una salvaguarda suficiente para adoptar la herramienta en producción sin arriesgar el código principal.
+**La lectura optimista:** los tres reseñadores independientes citados coinciden en que estos agentes rinden bien — con tickets claros, criterios de aceptación explícitos y alcance acotado — y que el mecanismo de revisión vía pull request es, en sí mismo, una salvaguarda suficiente para adoptar la herramienta en producción sin arriesgar el código principal.
 
 **La lectura escéptica:** el patrón de fallo que se repite en las tres reseñas es el mismo: ambigüedad. Ningún agente asíncrono sabe reconocer cuándo debería detenerse a preguntar en lugar de asumir y seguir adelante, lo que significa que el ahorro de tiempo prometido depende enteramente de qué tan bien especificada llegue la tarea — es decir, de trabajo humano previo que rara vez se contabiliza en las demos de marketing.
 
 ## Cómo empezar
 
 - Empieza con tickets que ya tendrías que escribir con detalle para un ingeniero junior: criterios de aceptación explícitos, alcance acotado, y una forma clara de verificar que el resultado es correcto (tests existentes, por ejemplo).
-- No uses agentes asíncronos como primera línea para problemas ambiguos o arquitectónicos — todas las fuentes de esta ficha coinciden en que ahí es donde más tiempo de revisión terminan costando.
+- No uses agentes asíncronos como primera línea para problemas ambiguos o arquitectónicos — todas las fuentes de esta ficha coinciden en que ahí es donde más tiempo de revisión termina costando.
 - Revisa el PR resultante con el mismo rigor que revisarías el de un colega nuevo: el hecho de que "parezca" terminado no significa que lo esté.
 
 ## Fuentes
