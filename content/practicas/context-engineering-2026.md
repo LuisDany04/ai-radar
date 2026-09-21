@@ -18,18 +18,18 @@ El término "prompt engineering" quedó asociado, en el uso común, a escribir i
 
 ## Por que importa
 
-Un agente que trabaja durante horas o dias acumula miles de turnos, resultados de herramientas y archivos leidos. Meter todo eso en la ventana de contexto no escala: además de los limites de tokens, el rendimiento del modelo se degrada antes de llegar al limite duro, un fenomeno que Willison llama "context rot". El mismo autor describe tres fallos concretos: **context poisoning** (una alucinacion queda fijada en el contexto y se referencia repetidamente), **context distraction** (un contexto tan largo que el modelo sobre-atiende al historial y descuida lo aprendido en entrenamiento) y **context confusion** (informacion superflua que el modelo usa para generar una respuesta de peor calidad).
+Un agente que trabaja durante horas o días acumula miles de turnos, resultados de herramientas y archivos leídos. Meter todo eso en la ventana de contexto no escala: además de los límites de tokens, el rendimiento del modelo se degrada antes de llegar al límite duro, un fenómeno que Willison llama "context rot". El mismo autor describe tres fallos concretos: **context poisoning** (una alucinación queda fijada en el contexto y se referencia repetidamente), **context distraction** (un contexto tan largo que el modelo sobre-atiende al historial y descuida lo aprendido en entrenamiento) y **context confusion** (información superflua que el modelo usa para generar una respuesta de peor calidad).
 
-Anthropic llega a la misma conclusion desde la practica de Claude Code: la calidad de un agente depende menos del modelo en si y mas de como esta organizado su contexto.
+Anthropic llega a la misma conclusión desde la práctica de Claude Code: la calidad de un agente depende menos del modelo en sí y más de cómo está organizado su contexto.
 
 ## Ejemplo
 
-Cuatro tecnicas concretas que documenta el post de Anthropic de septiembre de 2025:
+Cuatro técnicas concretas que documenta el post de Anthropic de septiembre de 2025:
 
-1. **Compactacion**: cuando la conversacion se acerca al limite de contexto, se resume el historial y se reinicia la sesion con ese resumen comprimido, preservando decisiones de arquitectura y problemas sin resolver.
-2. **Notas estructuradas / memoria agentica**: el agente escribe notas persistentes fuera de la ventana de contexto (por ejemplo, un archivo `NOTES.md`) que puede recuperar mas tarde. Anthropic cita como ejemplo a Claude jugando Pokemon, que mantiene conteos precisos a lo largo de miles de pasos gracias a memoria estructurada.
-3. **Arquitecturas de subagentes**: agentes especializados resuelven tareas acotadas con una ventana de contexto limpia y devuelven al agente coordinador un resumen condensado, tipicamente de **1.000 a 2.000 tokens**.
-4. **Recuperacion justo a tiempo (just-in-time)**: en vez de precargar todos los datos, el agente mantiene identificadores livianos (rutas de archivo, URLs) y los carga en tiempo de ejecucion solo cuando los necesita. Claude Code aplica esto con comandos de Bash como `head` y `tail` para inspeccionar bases de datos grandes sin cargar el objeto completo en contexto:
+1. **Compactación**: cuando la conversación se acerca al límite de contexto, se resume el historial y se reinicia la sesión con ese resumen comprimido, preservando decisiones de arquitectura y problemas sin resolver.
+2. **Notas estructuradas / memoria agéntica**: el agente escribe notas persistentes fuera de la ventana de contexto (por ejemplo, un archivo `NOTES.md`) que puede recuperar más tarde. Anthropic cita como ejemplo a Claude jugando Pokemon, que mantiene conteos precisos a lo largo de miles de pasos gracias a memoria estructurada.
+3. **Arquitecturas de subagentes**: agentes especializados resuelven tareas acotadas con una ventana de contexto limpia y devuelven al agente coordinador un resumen condensado, típicamente de **1.000 a 2.000 tokens**.
+4. **Recuperación justo a tiempo (just-in-time)**: en vez de precargar todos los datos, el agente mantiene identificadores livianos (rutas de archivo, URLs) y los carga en tiempo de ejecución solo cuando los necesita. Claude Code aplica esto con comandos de Bash como `head` y `tail` para inspeccionar bases de datos grandes sin cargar el objeto completo en contexto:
 
 ```bash
 # En vez de cargar el archivo completo en el contexto del agente:
@@ -37,31 +37,31 @@ head -n 50 registros_grandes.csv
 tail -n 50 registros_grandes.csv
 ```
 
-(Patron descrito en el post de Anthropic "Effective context engineering for AI agents", 29-09-2025.)
+(Patrón descrito en el post de Anthropic "Effective context engineering for AI agents", 29-09-2025.)
 
-Un post posterior de Anthropic, "Effective harnesses for long-running agents" (26-11-2025), agrega que la compactacion sola no basta para trabajo de produccion: recomienda combinarla con un `claude-progress.txt`, commits de git frecuentes y una lista de funcionalidades en JSON marcadas como pasa/falla para que un agente que retoma el trabajo en una sesion nueva sepa exactamente donde quedo el anterior.
+Un post posterior de Anthropic, "Effective harnesses for long-running agents" (26-11-2025), agrega que la compactación sola no basta para trabajo de producción: recomienda combinarla con un `claude-progress.txt`, commits de git frecuentes y una lista de funcionalidades en JSON marcadas como pasa/falla para que un agente que retoma el trabajo en una sesión nueva sepa exactamente dónde quedó el anterior.
 
 ## Datos
 
-| Tecnica | Cifra reportada | Fuente |
+| Técnica | Cifra reportada | Fuente |
 |---|---|---|
 | Resumen devuelto por subagentes | 1.000–2.000 tokens | Anthropic, "Effective context engineering for AI agents", 29-09-2025 |
 | Formato de respuesta de herramientas (detallado vs. conciso) | 206 tokens vs. 72 tokens (~67% menos) | Anthropic, "Writing effective tools for agents", 11-09-2025 |
-| Limite de tokens por respuesta de herramienta en Claude Code | 25.000 tokens por defecto | Anthropic, "Writing effective tools for agents", 11-09-2025 |
+| Límite de tokens por respuesta de herramienta en Claude Code | 25.000 tokens por defecto | Anthropic, "Writing effective tools for agents", 11-09-2025 |
 
-> [!duda] La cifra de "67% de reduccion" corresponde a un ejemplo puntual de formato de respuesta (herramienta con modo "detailed" vs "concise"), no a una medicion general de ahorro de contexto en todos los agentes.
+> [!duda] La cifra de "67% de reducción" corresponde a un ejemplo puntual de formato de respuesta (herramienta con modo "detailed" vs "concise"), no a una medición general de ahorro de contexto en todos los agentes.
 
 ## Debate
 
-Anthropic promueve la compactacion como tecnica central de context engineering, pero no todos los que construyen agentes en produccion reportan el mismo exito. Armin Ronacher, en su blog (lucumr.pocoo.org, 21-11-2025), cuenta que experimento con "context editing" (la funcion de edicion de contexto de Anthropic) y que "so far they haven't had a lot of success with context editing" en sus propios agentes, aunque considera la idea de podar tokens de intentos fallidos "interesante de explorar mas". Ronacher tambien senala que "testing and evals" es, en su experiencia, el problema mas dificil de todos en el diseno de agentes de larga duracion, mas que el propio manejo de contexto.
+Anthropic promueve la compactación como técnica central de context engineering, pero no todos los que construyen agentes en producción reportan el mismo éxito. Armin Ronacher, en su blog (lucumr.pocoo.org, 21-11-2025), cuenta que experimentó con "context editing" (la función de edición de contexto de Anthropic) y que "so far they haven't had a lot of success with context editing" en sus propios agentes, aunque considera la idea de podar tokens de intentos fallidos "interesante de explorar más". Ronacher también señala que "testing and evals" es, en su experiencia, el problema más difícil de todos en el diseño de agentes de larga duración, más que el propio manejo de contexto.
 
-## Como empezar
+## Cómo empezar
 
-1. Antes de agregar mas instrucciones al system prompt, pregunta si el problema es en realidad de contexto: ¿el agente tiene la informacion correcta en el momento correcto, o tiene demasiada informacion irrelevante?
-2. Si tu agente hace tareas largas, implementa un mecanismo de resumen/compactacion antes de tocar el limite de tokens, no despues.
-3. Para sub-tareas acotadas (buscar en el codigo, investigar un error), usa un subagente con contexto limpio en vez de acumular todo en la conversacion principal.
+1. Antes de agregar más instrucciones al system prompt, pregunta si el problema es en realidad de contexto: ¿el agente tiene la información correcta en el momento correcto, o tiene demasiada información irrelevante?
+2. Si tu agente hace tareas largas, implementa un mecanismo de resumen/compactación antes de tocar el límite de tokens, no después.
+3. Para sub-tareas acotadas (buscar en el código, investigar un error), usa un subagente con contexto limpio en vez de acumular todo en la conversación principal.
 4. Prefiere que el agente cargue datos bajo demanda (rutas, IDs, comandos como `head`/`grep`) en vez de inyectar archivos completos por adelantado.
-5. Instrumenta evals reales antes de asumir que una tecnica de contexto funciona: la evidencia de Ronacher sugiere que "funciona en teoria" y "funciona en produccion" no siempre coinciden.
+5. Instrumenta evals reales antes de asumir que una técnica de contexto funciona: la evidencia de Ronacher sugiere que "funciona en teoría" y "funciona en producción" no siempre coinciden.
 
 ## Fuentes
 

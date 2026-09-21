@@ -16,7 +16,7 @@ Aplicar TDD (desarrollo dirigido por pruebas) a un agente de código admite al m
 
 ## Por qué importa
 
-La recomendación de "decile al agente que haga TDD" se volvió casi un reflejo en la industria durante 2025, con el argumento de que las pruebas evitan que el agente "haga trampa" escribiendo una prueba que simplemente confirma el comportamiento roto que acaba de generar. Pero en 2026 empezó a aparecer evidencia empírica —no solo intuición— que pone a prueba esa recomendación, y los resultados no son unánimes. Para quien decide si vale la pena imponerle TDD a su agente, la pregunta práctica no es filosófica sino de costo: ¿el ciclo completo de TDD mejora el diseño o la corrección del código lo suficiente para justificar el token extra y la fricción que agrega?
+La recomendación de "dile al agente que haga TDD" se volvió casi un reflejo en la industria durante 2025, con el argumento de que las pruebas evitan que el agente "haga trampa" escribiendo una prueba que simplemente confirma el comportamiento roto que acaba de generar. Pero en 2026 empezó a aparecer evidencia empírica —no solo intuición— que pone a prueba esa recomendación, y los resultados no son unánimes. Para quien decide si vale la pena imponerle TDD a su agente, la pregunta práctica no es filosófica sino de costo: ¿el ciclo completo de TDD mejora el diseño o la corrección del código lo suficiente para justificar el token extra y la fricción que agrega?
 
 ## Ejemplo
 
@@ -49,7 +49,7 @@ Ninguno de los dos lados tiene, a septiembre de 2026, un estudio a gran escala e
 2. Prueba ambos flujos (con y sin TDD completo) en una tarea representativa de tu propio código antes de estandarizar uno: los resultados publicados varían según el tamaño de la tarea y el modelo, y ninguno de los estudios disponibles usó tu código base.
 3. Si te preocupa el costo, mide el consumo de tokens de tu propio flujo: la cifra de "hasta 8,5 veces más tokens" de Böckeler es de su experimento puntual, pero confirma que TDD completo no es gratis en agentes autónomos.
 4. Considera alternativas híbridas que reportan ambos bandos: mutation testing para medir la calidad real de la cobertura, y análisis estático o de impacto (como el mapa código-pruebas de TDAD) en vez de, o adicional a, el ciclo clásico completo.
-5. Si eliges mantener el humano en el ciclo (variante 1 o 2: vos escribís o revisás las pruebas antes de que el agente implemente), tené en cuenta que la mayoría de la evidencia citada aquí evalúa la variante 3 (agente autónomo completo); tu resultado con supervisión humana puede no parecerse al de estos experimentos.
+5. Si eliges mantener el humano en el ciclo (variante 1 o 2: tú escribes o revisas las pruebas antes de que el agente implemente), ten en cuenta que la mayoría de la evidencia citada aquí evalúa la variante 3 (agente autónomo completo); tu resultado con supervisión humana puede no parecerse al de estos experimentos.
 
 ## Fuentes
 

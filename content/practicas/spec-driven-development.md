@@ -70,7 +70,7 @@ La crítica más desarrollada es la de François Zaninotto (marmelab.com, 12-11-
 
 1. No apliques SDD a una tarea pequeña o exploratoria: tanto la documentación oficial como sus críticos coinciden en que el costo de escribir requirements/design/tasks solo se justifica en funcionalidades no triviales o en código que ya existe y hay que respetar.
 2. Si tu equipo ya exige diseño revisado y plan de rollback para cambios grandes, una spec formal no es burocracia nueva: es el mismo razonamiento en un formato que un agente puede ejecutar. Empieza ahí, no en el primer commit del proyecto.
-3. Prueba el flujo con un caso acotado antes de adoptarlo en todo el equipo: instala Spec Kit (`uvx --from git+https://github.com/github/spec-kit.git specify init <nombre>`) o abre un spec de Kiro en un solo feature, y mide vos mismo cuánto tiempo y cuánta documentación te pide, en vez de asumir la cifra de otro caso.
+3. Prueba el flujo con un caso acotado antes de adoptarlo en todo el equipo: instala Spec Kit (`uvx --from git+https://github.com/github/spec-kit.git specify init <nombre>`) o abre un spec de Kiro en un solo feature, y mide tú mismo cuánto tiempo y cuánta documentación te pide, en vez de asumir la cifra de otro caso.
 4. Si usas notación EARS para requisitos, mantenla en una sola línea por criterio ("WHEN \<condición\>, THE SYSTEM SHALL \<comportamiento\>"): es lo que la hace verificable, y es lo que se pierde si el requisito se redacta como prosa libre.
 5. Vigila la "ceguera de contexto" que reporta Zaninotto: en un código base grande, revisa explícitamente si el agente detectó las funciones existentes que la nueva especificación debería tocar, no asumas que la especificación por sí sola se lo garantiza.
 

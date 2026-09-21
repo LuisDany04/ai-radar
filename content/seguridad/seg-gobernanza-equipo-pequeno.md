@@ -5,7 +5,7 @@ track: seguridad
 type: guia
 level: intro
 tags: gobernanza, permisos, revision-de-codigo, auditoria, equipo-pequeno, owasp, nist
-summary: "Qué permisos dar a un agente de código, qué exigir antes de producción y cómo auditar su actividad: una política mínima y copiable para un equipo de 3 a 10 personas sin equipo de seguridad dedicado, basada en OWASP, NIST AI RMF y la documentación oficial de GitHub y Anthropic."
+summary: "Qué permisos dar a un agente de código, qué exigir antes de producción y cómo auditar su actividad: política mínima y copiable para un equipo de 3 a 10 personas sin equipo de seguridad, basada en OWASP, NIST AI RMF y documentación oficial de GitHub y Anthropic."
 updated: 2026-09-21
 reading_minutes: 11
 source_span: 2024-11-17..2026-06-15
@@ -83,12 +83,12 @@ Aunque tu equipo no monte un SIEM, esto es lo mínimo que conviene poder reconst
 
 Adaptado de las cuatro funciones del NIST AI RMF (Govern, Map, Measure, Manage) a algo ejecutable por un equipo sin área de seguridad:
 
-1. **Gobernar (una vez).** Nombrá una persona (no necesariamente de seguridad) dueña de la política del agente, aunque sea a medio tiempo. Sin dueño, la política se degrada sola en unas semanas.
-2. **Mapear (una vez, revisar cada trimestre).** Listá qué agentes tienen acceso a qué repos, con qué nivel de autonomía (¿pregunta antes de cada acción o corre en modo auto?) y qué MCP servers de terceros están conectados (ver la ficha de este track sobre revisión de MCP y skills de terceros).
+1. **Gobernar (una vez).** Nombra una persona (no necesariamente de seguridad) dueña de la política del agente, aunque sea a medio tiempo. Sin dueño, la política se degrada sola en unas semanas.
+2. **Mapear (una vez, revisar cada trimestre).** Lista qué agentes tienen acceso a qué repos, con qué nivel de autonomía (¿pregunta antes de cada acción o corre en modo auto?) y qué MCP servers de terceros están conectados (ver la ficha de este track sobre revisión de MCP y skills de terceros).
 3. **Configurar mínimos (una vez, ajustar según fricción real).** Un `.claude/settings.json` versionado con las reglas `deny` de arriba, branch protection con revisión obligatoria, CODEOWNERS en las rutas sensibles y push protection activado.
-4. **Medir (continuo).** Activá el exporter de OpenTelemetry de Claude Code aunque sea hacia un destino simple; sin esto no hay forma de saber si la política se está cumpliendo.
-5. **Gestionar (continuo).** Revisá el log de push protection y las decisiones de permiso denegadas una vez por semana al principio: son la señal más barata de que algo se está pidiendo fuera de lo esperado, antes de que sea un incidente.
-6. **Antes de cualquier cambio grande** (nuevo MCP server, nuevo repo con datos sensibles, subir el nivel de autonomía del agente), repetí el paso 2 para ese cambio puntual en vez de asumir que la política general ya lo cubre.
+4. **Medir (continuo).** Activa el exporter de OpenTelemetry de Claude Code aunque sea hacia un destino simple; sin esto no hay forma de saber si la política se está cumpliendo.
+5. **Gestionar (continuo).** Revisa el log de push protection y las decisiones de permiso denegadas una vez por semana al principio: son la señal más barata de que algo se está pidiendo fuera de lo esperado, antes de que sea un incidente.
+6. **Antes de cualquier cambio grande** (nuevo MCP server, nuevo repo con datos sensibles, subir el nivel de autonomía del agente), repite el paso 2 para ese cambio puntual en vez de asumir que la política general ya lo cubre.
 
 ## Fuentes
 

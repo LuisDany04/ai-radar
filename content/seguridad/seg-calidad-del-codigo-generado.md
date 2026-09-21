@@ -48,11 +48,11 @@ Un equipo pequeño que decide cuánta revisión humana exigirle al código que s
 
 ## Cómo empezar
 
-1. No repitas "el X% del código de IA es inseguro" como si fuera una constante: citá el estudio, el año y qué midió exactamente, como en la tabla de arriba.
+1. No repitas "el X% del código de IA es inseguro" como si fuera una constante: cita el estudio, el año y qué midió exactamente, como en la tabla de arriba.
 2. No relajes SAST/SCA ni la revisión humana porque un proveedor de modelos diga que su versión más nueva "ya no tiene ese problema": Veracode encontró que la tasa de aprobación de seguridad se mantiene estancada en ~55% desde hace dos años pese a que la corrección sintáctica mejoró a más de 95%.
-3. Priorizá revisión reforzada en las categorías que los estudios marcan como más débiles de forma consistente: XSS e inyección de logs (13-15% de código seguro según Veracode) y contraseñas hardcodeadas/path traversal (Sonar).
-4. Si tu organización va a citar uno de estos estudios en una decisión de política interna, identificá primero si el que lo publicó vende algo relacionado con el resultado, sin descartarlo solo por eso.
-5. Medí tu propio repositorio en vez de importar el porcentaje de otro: corré tu SAST/linter habitual sobre una muestra de commits generados por IA de las últimas semanas y compará contra tu propio histórico, en lugar de asumir que el 45% de Veracode aplica a tu stack.
+3. Prioriza revisión reforzada en las categorías que los estudios marcan como más débiles de forma consistente: XSS e inyección de logs (13-15% de código seguro según Veracode) y contraseñas hardcodeadas/path traversal (Sonar).
+4. Si tu organización va a citar uno de estos estudios en una decisión de política interna, identifica primero si el que lo publicó vende algo relacionado con el resultado, sin descartarlo solo por eso.
+5. Mide tu propio repositorio en vez de importar el porcentaje de otro: corre tu SAST/linter habitual sobre una muestra de commits generados por IA de las últimas semanas y compara contra tu propio histórico, en lugar de asumir que el 45% de Veracode aplica a tu stack.
 
 ## Fuentes
 
